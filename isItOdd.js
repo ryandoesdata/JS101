@@ -1,4 +1,9 @@
-let function isOdd() {
-}
+function isOdd(number) {
+if (number % 2 === 1 || -1) {
+  return true
+  } else {
+  return false
+  }
+};
 
-test test test
+console.log(isOdd(-17));
