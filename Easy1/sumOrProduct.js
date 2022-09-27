@@ -5,7 +5,8 @@ let operator = rlSync.question('Enter "s" to compute the sum, or "p" to compute 
 
 if (operator = "s") {
   for (let i = 1; i <= int; i++) {  
-  console.log(i += i);
+  console.log(`The sum of the integers between 1 and ${int} is (i += 
+int.length)`);
   }
 };
 
