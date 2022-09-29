@@ -1,6 +1,11 @@
-let string = 'b l a h ';
-let array = string.split(''); 
+function utfString(string) {
 
-//console.log(array);
+  let total = 0;
 
-console.log(string.charCodeAt(0));
+  for (let i = 0; i < string.length; i += 1) {
+    total += string.charCodeAt(i);
+  }
+return total; 
+}
+
+console.log(utfString("Launch School"));
