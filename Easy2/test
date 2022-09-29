@@ -1,0 +1,3 @@
+let num = 500;
+let array = num.split('');
+console.log(array);
