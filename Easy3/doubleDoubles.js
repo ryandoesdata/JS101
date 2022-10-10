@@ -9,10 +9,10 @@ function twice(number) {
   let fullArray = array.length;
     
   for (let i = 0; i < arrayOne; i += 1) {
-    firstHalf.push(arrayOne[i]);
+    firstHalf.push(array[i]);
   }
-  for (let i = arrayOne; i < fullArray.length; i += 1) {
-    secondHalf.push(fullArray[i]);
+  for (let i = arrayOne; i < fullArray; i += 1) {
+    secondHalf.push(array[i]);
   }
   
   let firstHalfNum = parseInt(firstHalf.join(''));
@@ -25,4 +25,4 @@ function twice(number) {
   }
 };
 
-twice(66);      
+twice(88);  
