@@ -1,16 +1,16 @@
 function crunch(string) {
-  let array = string.split('');
-    for (let i = 0; i < array.length; i++) {
-      let char = array[i];
-      let repeats = array[i + 1];
-      let newArray = [];
-    if (char === repeats) {
-      array.slice(char, repeats);
-    }
- return newArray.push([char]);
-  }
-}
+  let index = 0;
+  let crunchText = '';
 
-console.log(crunch("tthhiiss wwiill nnoott wwoorrkk"));
+while (index <= string.length - 1) {
+  if (string[index] !== string[index + 1]) { 
+    (crunchText += string[index]);
+    }
+  index += 1;
+  }
+return crunchText;
+};
+
+console.log(crunch('tteesstt110022'));
 
       
