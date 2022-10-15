@@ -11,4 +11,4 @@ console.log(oneZeroArray.join(''));
 }
 
 
-stringy(10)
+stringy(420)

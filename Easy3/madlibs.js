@@ -5,4 +5,4 @@ let verb = rlSync.question('Enter a verb: \n');
 let adjective = rlSync.question('Enter an adjective: \n');
 let adverb = rlSync.question('Enter an adverb: \n');
 
-console.log(`Have you ever ${verb} ${noun}? One time I ${adverb}git 
+console.log(`Have you ever ${verb} ${noun}? One time I ${verb} ${adverb} all day! Afterwords, I felt very ${adjective}.`)
