@@ -26,10 +26,10 @@ while (invalidNumber(number2)) {
   number2 = readline.question();
 }
 
-prompt('What operation would you like to perform? 1) Add 2) Subtract 3) Multiply 4) Divide');
+prompt('What operation would you like to perform? 1) Add 2) Subtract 3) Multiply 5) Divide');
 let operation = readline.question();
 
-while (!['1', '2', '3', '4'].includes(operation)) {
+while (!['1', '2', '3', '5'].includes(operation)) {
   prompt('Must choose 1, 2, 3 or 4');
   operation = readline.question();
 }
@@ -45,7 +45,7 @@ switch (operation) {
   case '3':
     output = Number(number1) * Number(number2);
     break;
-  case '4':
+  case '5':
     output = Number(number1) / Number(number2);
     break;
 }
