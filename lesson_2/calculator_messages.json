@@ -1,0 +1,18 @@
+{
+  "en": {
+  "Welcome" : "Welcome to Calculator!\n Enter your name:",
+  "validName": "Make sure to enter a valid name.",
+  "firstNumber": "What's the first number?",
+  "validNumber": "Hmm... that doesn't look like a valid number.",
+  "secondNumber": "What's the second number?",
+  "operations": "What operation would you like to perform? 1) Add 2) Subtract 3) Multiply 4) Divide",
+  "numCheck": "Must choose 1, 2, 3 or 4",
+  "result": "The result is: `${output}`",
+  "repeat": "Would you like to perform another calculation? 1) Yes 2) No",
+  "yesOrNo": "Must choose 1 or 2"
+  },
+  "es": {
+    "Welcome": "Bienvenido a la calculadora!\n Entre su nombre:",
+    "validName": "Asegúrese de entrar un nombre válido."
+  }
+}
