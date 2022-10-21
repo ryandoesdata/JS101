@@ -1,11 +1,9 @@
 {
   "en": {
-  "Welcome" : "Welcome to Calculator!\n Enter your name:",
-  "validName": "Make sure to enter a valid name.",
-  "firstNumber": "What's the first number?",
+  "firstNumber": "Enter your remaining loan amount without special characters",
   "validNumber": "Hmm... that doesn't look like a valid number.",
-  "secondNumber": "What's the second number?",
-  "operations": "What operation would you like to perform? 1) Add 2) Subtract 3) Multiply 4) Divide",
+  "secondNumber": "Enter your APR without special characters (eg 5, 2.9, 1.9)",
+  "thirdNumber": "Enter your remaining loan duration in months",
   "numCheck": "Must choose 1, 2, 3 or 4",
   "result": "The result is: ",
   "repeat": "Would you like to perform another calculation? 1) Yes 2) No",

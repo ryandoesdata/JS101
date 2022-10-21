@@ -21,12 +21,11 @@ while (name.trim() === '') {
   name = readline.question();
 }
 
-while (true) {
+function invalidNumber(number) {
+  return Number.isNaN(Number(number));
+}
 
-  // eslint-disable-next-line no-inner-declarations
-  function invalidNumber(number) {
-    return Number.isNaN(Number(number));
-  }
+while (true) {
 
   prompt('firstNumber');
   let number1 = readline.question();
@@ -68,7 +67,7 @@ while (true) {
       break;
   }
 
-  prompt(`The result is: ${output}`);
+  console.log(`The result is ${output}`);
 
   prompt('repeat');
   let answer = readline.question();

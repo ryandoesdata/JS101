@@ -47,9 +47,9 @@ while (true) {
 
   let splitEquation = (1 - Math.pow((1 + monthlyInterest), (-loanDuration)));
 
-  let monthlyPayment = loanAmount * (monthlyInterest / splitEquation);
+  let monthlyPayment = (loanAmount * (monthlyInterest / splitEquation));
 
-  console.log(`\nThis month's payment is ${monthlyPayment}.\n \nWe're a nice bank, so feel free to round down to the nearest cent :)\n`);
+  console.log(`This month's payment is ${monthlyPayment}`);
 
   prompt('repeat');
   let answer = readline.question();
