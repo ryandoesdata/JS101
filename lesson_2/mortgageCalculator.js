@@ -49,7 +49,9 @@ while (true) {
 
   let monthlyPayment = (loanAmount * (monthlyInterest / splitEquation));
 
-  console.log(`This month's payment is ${monthlyPayment}`);
+  let twoDecimalMonthlyPayment = ((Math.round(monthlyPayment * 100)) / 100);
+
+  console.log(`This month's payment is $${twoDecimalMonthlyPayment}`);
 
   prompt('repeat');
   let answer = readline.question();
