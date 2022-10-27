@@ -14,8 +14,14 @@ function prompt(key) {
 }
 
 function invalidNumber(number) {
-  return Number.isNaN(Number(number));
+  return (Number.isNaN(Number(number))) || (number <= 0);
 }
+
+function invalidAPR(number) {
+  return (Number.isNaN(Number(number))) || (number < 0);
+}
+
+let test blah blah
 
 while (true) {
 
@@ -30,7 +36,7 @@ while (true) {
   prompt('secondNumber');
   let APR = readline.question();
 
-  while (invalidNumber(APR)) {
+  while (invalidAPR(APR)) {
     prompt('validNumber');
     APR = readline.question();
   }
@@ -49,7 +55,13 @@ while (true) {
 
   let monthlyPayment = (loanAmount * (monthlyInterest / splitEquation));
 
-  console.log(`This month's payment is ${monthlyPayment}`);
+  if (monthlyInterest === 0) {
+    monthlyPayment = (loanAmount / loanDuration);
+  }
+
+  let twoDecimalMonthlyPayment = (monthlyPayment.toFixed(2));
+
+  console.log(`This month's payment is $${twoDecimalMonthlyPayment}`);
 
   prompt('repeat');
   let answer = readline.question();
