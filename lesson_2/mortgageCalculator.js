@@ -21,7 +21,7 @@ function invalidAPR(number) {
   return (Number.isNaN(Number(number))) || (number < 0);
 }
 
-let test blah blah
+let test blah
 
 while (true) {
 
