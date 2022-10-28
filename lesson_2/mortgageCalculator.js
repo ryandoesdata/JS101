@@ -21,10 +21,7 @@ function invalidAPR(number) {
   return (Number.isNaN(Number(number))) || (number < 0);
 }
 
-let test blah
-
-while (true) {
-
+function getLoanAmount() {
   prompt('firstNumber');
   let loanAmount = readline.question();
 
@@ -32,6 +29,11 @@ while (true) {
     prompt('validNumber');
     loanAmount = readline.question();
   }
+}
+
+while (true) {
+
+  getLoanAmount(loanAmount);
 
   prompt('secondNumber');
   let APR = readline.question();
