@@ -15,6 +15,7 @@ console.log(newArr);
 
 */
 
+// eslint-disable-next-line no-dupe-keys
 let obj = { fruit: 'apple', vegetable: 'carrot', fruit: 'pear' };
 
 console.log(obj);

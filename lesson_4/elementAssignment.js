@@ -1,6 +1,6 @@
 let numbers = [1, 2, 3, 4];
 
-numbers[1, 2, 3] += 1;  // => 2
+numbers[1] += 1;  // => 2
 
 console.log(numbers);                      // => [ 2, 2, 3, 4 ]
 

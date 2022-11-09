@@ -23,6 +23,8 @@ function selectFruit(produceList) {
 
 console.log(selectFruit(produce));
 
+/*
+
 function selectFruit(produceList) {
   let produceKeys = Object.keys(produceList);
   let selectedFruits = {};
@@ -30,9 +32,11 @@ function selectFruit(produceList) {
   for (let counter = 0; counter < produceKeys.length; counter++) {
     let currentKey = produceKeys[counter];
     let currentValue = produceList[currentKey];
-    
+
     if (currentValue === 'Fruit') {
       selectedFruits[currentKey] = currentValue;
     }
   }
 }
+
+*/
