@@ -1,0 +1,45 @@
+Input: An array
+Output: An array
+
+Rules: 
+
+Must use the filter method
+Must return a new array
+New array must be identical in structure to the original
+Must only return numbers from the original array that are multiples of 3
+
+Data Structure:
+
+Input: 
+
+An array with four elements. Each element is an array.
+The arrays only contain numbers.
+
+Output:
+
+The same structure as the input, but only containing multiples of 3.
+
+Examples and Test Cases:
+
+Input: 
+
+let arr = [[2], [3, 5, 7], [9], [11, 15, 18]];
+
+Output:
+
+let arr = [[], [3], [9], [15, 18]];
+
+Algorithm:
+
+Use the map method on the original array to create a new array.
+Use a function to access each element's value, and add 1 to it.
+console.log the new array to verify the results.
+
+Question: How to access each element's value...
+
+arr[index].key = value
+
+Code:
+
+let arr = [{ a: 1 }, { b: 2, c: 3 }, { d: 4, e: 5, f: 6 }];
+let newArr = arr.map(element => (element[0] + 1))

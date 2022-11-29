@@ -1,0 +1,47 @@
+Input: An array of object literals
+Output: An array of object literals
+
+Rules: 
+
+Must use the map method
+Must return a new array
+New array must be identical in structure to the original
+Each number in the new array must match the original, incremented by one.
+
+Data Structure:
+
+Input: 
+
+An array with three elements. Each element is an object literal.
+The object literal's keys are individual letters going down the alphabet.
+The object literal's values are numbers going up by one.
+
+Output:
+
+The same structure as the input, but with each value incremented by 1.
+
+Examples and Test Cases:
+
+Input: 
+
+let arr = [{ a: 1 }, { b: 2, c: 3 }, { d: 4, e: 5, f: 6 }];
+
+Output:
+
+arr = [{ a: 2 }, { b: 3, c: 4 }, {d: 5, e: 6, f: 7}];
+
+Algorithm:
+
+Declare a new variable that will represent the new array.
+Use the map method on the original array to create a new array.
+Use a function to access each element's value, and add 1 to it.
+console.log the new array to verify the results.
+
+Question: How to access each element's value...
+
+arr[index].key = value
+
+Code:
+
+let arr = [{ a: 1 }, { b: 2, c: 3 }, { d: 4, e: 5, f: 6 }];
+let newArr = arr.map(element => (element[0] + 1))
