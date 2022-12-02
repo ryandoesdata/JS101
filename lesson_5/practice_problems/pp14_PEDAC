@@ -1,0 +1,58 @@
+Input: An object
+Output: An Array
+
+Rules:
+
+New array must contain colors of fruit
+New array must contain sizes of vegetables
+Sizes must be uppercase
+Colors must be capitalized
+
+Data Structure:
+
+Input:
+
+An object with five properties
+Each property contains three nested properties
+Two of the nested properties, type and size, contain a single string value
+One of the nested properties contains an array
+
+Output:
+
+An array with strings and nested arrays as elements
+
+If the nested property key "type" has a value 'fruit', the output
+element should be the value array of the nested property key "colors", with
+each element Capitalized.
+
+If the nested property key "type" has a value of 'vegetable', the output
+element should be the value string of the nested property key "size",
+uppercased.
+
+Examples and Test Cases:
+
+Input:
+
+let obj = {
+  grape: { type: 'fruit', colors: ['red', 'green'], size: 'small' },
+  carrot: { type: 'vegetable', colors: ['orange'], size: 'medium' },
+  apple: { type: 'fruit', colors: ['red', 'green'], size: 'medium' },
+  apricot: { type: 'fruit', colors: ['orange'], size: 'medium' },
+  marrow: { type: 'vegetable', colors: ['green'], size: 'large' },
+};
+
+Output:
+
+[["Red", "Green"], "MEDIUM", ["Red", "Green"], ["Orange"], "LARGE"]
+
+Algorithm:
+
+Declare a new variable that will represent the new array
+
+Use a for in loop to iterate through the properties
+
+If the type is fruit, push the value of colors, capitalize the
+the first letter using .toUpperCase([0])
+
+If the type is vegetable, push the value of size. Capitalize
+the whole word using .toUpperCase()
