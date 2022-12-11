@@ -1,9 +1,3 @@
-let obj = {
-  grape: { type: 'fruit', colors: ['red', 'green'], size: 'small' },
-  carrot: { type: 'vegetable', colors: ['orange'], size: 'medium' },
-  apple: { type: 'fruit', colors: ['red', 'green'], size: 'medium' },
-  apricot: { type: 'fruit', colors: ['orange'], size: 'medium' },
-  marrow: { type: 'vegetable', colors: ['green'], size: 'large' },
-};
+let confusingNumbers = [1, 2, 3, 4, 5, 6, 7];
 
-console.log(obj.grape.type);
+console.log(confusingNumbers.slice(2, 5));
