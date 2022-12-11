@@ -1,0 +1,55 @@
+Input: An array of object literals
+Output: An array of object literals
+
+Rules: 
+
+New array must contain only the objects where all the numbers are even.
+
+Data Structure:
+
+Input: 
+
+An array with three elements. Each element is an object literal.
+
+The first element has one object, the second has three, and the third has two.
+
+The objects' keys are all letters.
+
+The objects' values are arrays of integers.
+
+Output:
+
+The same structure as the input, but only the objects whose values contain only even numbers.
+
+Examples and Test Cases:
+
+Input: 
+
+let arr = [
+  { a: [1, 2, 3] },
+  { b: [2, 4, 6], c: [3, 6], d: [4] },
+  { e: [8], f: [6, 10] },
+];
+
+Output:
+[  
+  { b: [2, 4, 6], d: [4], e: [8], f: [6, 10] }
+];
+
+Question: is a key value pair an object? I don't think so...That's a property of an object. Yes, the object literal, or object, is contained within one set of curly braces.
+
+Algorithm:
+
+Declare a new variable that will represent the new array.
+Use Object.values and .map to iterate through the values. 
+Use a function to access each element's value, and add 1 to it.
+console.log the new array to verify the results.
+
+Question: How to access each element's value...
+
+arr[index].key = value
+
+Code:
+
+let arr = [{ a: 1 }, { b: 2, c: 3 }, { d: 4, e: 5, f: 6 }];
+let newArr = arr.map(element => (element[0] + 1))

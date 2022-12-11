@@ -6,21 +6,14 @@ let obj = {
   marrow: { type: 'vegetable', colors: ['green'], size: 'large' },
 };
 
-let newArr = [];
+let capitalize = word => word[0].toUpperCase() + word.slice(1);
 
-for (let property in obj) {
-  for (let nestedProp in property) {
-    if (obj.property.nestedProp === 'fruit') {
-      let colorArr = (obj.property.colors).split('');
-      colorArr[0].toUpperCase();
-      colorArr.join('');
-      newArr.push(colorArr);
-    } else {
-      newArr.push((obj.property.size).toUpperCase());
-    }
-    return nestedProp;
+let modArr = Object.values(obj).map(attributes => {
+  if (attributes['type'] === 'fruit') {
+    return attributes['colors'].map(char => capitalize(char));
+  } else {
+    return attributes['size'].toUpperCase();
   }
-  return property;
-}
+});
 
-console.log(newArr);
+console.log(modArr);
