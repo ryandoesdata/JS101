@@ -1,0 +1,49 @@
+Input: Nothing? A function?
+Output: A string
+
+Rules: 
+
+String must contain only letters a - f, lowercase, and numbers 0-9.
+String must include dashes after the 8th, 13th, 18th, and 23rd character.
+String must contain groups of 8 - 4 - 4 - 4 - and 12 characters. Dashes not included.
+
+Data Structure:
+
+Input: 
+
+A function with no arguments.
+
+Output:
+
+A UUID string.
+
+Examples and Test Cases:
+
+Input: 
+
+let function UUID => {
+  code
+}
+
+Output:
+
+'12345678-abcd-ef12-3456-7890abcdef01'
+
+Algorithm:
+
+Declare an empty array to push the characters into.
+
+Declare a function with no arguments.
+
+Inside the function use Math.floor, and Math.random (times 16) to obtain the random numbers and letters. 0 through 9 are '0' - '9' and 10 - 15 are 'a' - 'f'.
+
+Reapeat 32 times, pushing the characters into the array.
+
+Create variables for the groups. firstGroup, secondGroup, thirdGroup, fourthGroup, and fifthGroup.
+
+Join the characters so each group is one string.
+
+Interpolate the variables together with dashes in between.
+
+Code:
+

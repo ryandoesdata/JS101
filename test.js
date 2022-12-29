@@ -1,3 +1,11 @@
-let confusingNumbers = [1, 2, 3, 4, 5, 6, 7];
+//test.js
 
-console.log(confusingNumbers.slice(2, 5));
+function square(num) {
+  return num * num;
+}
+
+const myArr = [1, 2, 3, 4, 5];
+
+let squares = myArr.map(num => square(num));
+
+console.log(squares);

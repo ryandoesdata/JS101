@@ -1,0 +1,40 @@
+Input: An array
+Output: An object
+
+Rules: 
+
+New object must contain key value pairs where
+the key is the first item in each subarray, and
+the value is the second.
+
+Data Structure:
+
+Input: 
+
+An array with four subarrays. Each subarray contains two elements, one is always a string, and the other can be a number, string, object, or array. I suppose it doesn't matter what the second item's value is.
+
+Output:
+
+An object with four key, value pairs.
+
+Examples and Test Cases:
+
+Input: 
+
+let arr = [['a', 1], ['b', 'two'], ['sea', {'c': 3}], ['D', ['a', 'b', 'c']]];
+
+Output:
+{ a: 1, b: 'two', sea: { c: 3 }, D: [ 'a', 'b', 'c'] }
+
+Algorithm:
+
+Declare the variable with the input array.
+
+Declare a variable with empty curly braces.
+
+Iterate through the array, then through the nested arrays. Assign the first element as the new objects' keys, and the second element as the objects' values.
+
+Code:
+
+let arr = [{ a: 1 }, { b: 2, c: 3 }, { d: 4, e: 5, f: 6 }];
+let newArr = arr.map(element => (element[0] + 1))
