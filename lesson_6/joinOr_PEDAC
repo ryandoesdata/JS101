@@ -1,0 +1,105 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable max-len */
+/*
+
+
+Input: Up to three arguments: An array and two strings.
+Output: A string
+
+Rules: 
+
+The first parameter must be an array.
+The second two parameters must be strings.
+
+If there is only one parameter, the default is to join the elements with ', ' and place 'or ' before the last element.
+If there are two parameters, the second one is a delimiter.
+If there are three parameters, the third one replaces 'or '. Concat an extra space after the third argument.
+If there are no elements in the array, joinOr returns an empty string.
+If there is one element in the array, joinOr returns only the value.
+If there are two elements in the array, joinOr returns them with ' or ' as a delimiter.
+
+
+Data Structure:
+
+Input:
+
+A function with up to three arguments.
+
+The first argument is an array, which comes from the function emptySquares(board).
+
+The second argument is a string, which will act as the delimiter.
+
+The third argument is also a string, and will always replace the final delimiter.
+
+The third argument must have one additional whitespace added after it.
+
+Output:
+
+A string.
+
+
+Examples and Test Cases:
+
+Input:                           Output:
+
+joinOr([1, 2, 3]);               // => "1, 2, or 3"
+joinOr([1, 2, 3], '; ');         // => "1; 2; or 3"
+joinOr([1, 2, 3], ', ', 'and');  // => "1, 2, and 3"
+joinOr([]);                      // => ""
+joinOr([5]);                     // => "5"
+joinOr([1, 2]);                  // => "1 or 2"
+
+function joinOr() {
+  console.log(arguments)
+  const emptySpaces = arguments[0];
+  const lastNumber = emptySpaces[arguments.length];
+  const withoutLastNumber = emptySpaces.slice(0, lastNumber);
+  const delimiter = arguments[1];
+  const replaceOr = arguments[2];
+
+  if (arguments.length === 1) {
+    console.log(`${withoutLastNumber.join(', ')}, or ${lastNumber}`);
+  } else if (arguments.length === 2) {
+    console.log(`${withoutLastNumber.join(delimiter)}${delimiter} or ${lastNumber}`);
+  } else if (emptySpaces === []) {
+    console.log("");
+  } else if (arguments.length === 1) {
+    console.log(`${emptySpaces}`);
+  } else if (arguments.length === 2) {
+    console.log(`${emptySpaces[0]} or ${emptySpaces[1]}`);
+  }
+}
+
+Algorithm:
+
+Declare a function with three arguments: openSquaresArr, delimiter, replaceOr.
+
+Let openSquaresArr equal the emptySquares(board)
+Let delimiter and replaceOr equal empty strings
+Let lastNumber equal openSquaresArr[openSquaresArr.length]
+Let withoutLastNumber equal openSquaresArr.slice(0, lastNumber)
+
+if !!delimiter and !!replaceOr equal false, return `${withoutLastNumber.join(', ')}, or ${lastNumber}` 
+if !!replaceOr equals false, return `${withoutLastNumber.join(delimiter)}{delimiter} or ${lastNumber}`
+if openSquaresArr === [], return ""
+if openSquaresArr.length === 1, return `${openSquaresArr}`
+if openSquaresArr.length === 2, return `${openSquaresArr[0]} or ${openSquaresArr[1]}`
+
+
+Looked at answer: The key that I was missing is that function parameters can be assigned values like variables.
+
+function joinOr(arr, delimiter = ', ', word = 'or') {
+  switch (arr.length) {
+    case 0:
+      return '';
+    case 1:
+      return `${arr[0]}`;
+    case 2:
+      return arr.join(` ${word} `);
+    default:
+      return arr.slice(0, arr.length - 1).join(delimiter) +
+             `${delimiter}${word} ${arr[arr.length - 1]}`;
+  }
+}
+
+*/
