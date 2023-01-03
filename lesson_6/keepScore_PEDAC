@@ -3,103 +3,59 @@
 /*
 
 
-Input: Up to three arguments: An array and two strings.
-Output: A string
+Input: A string
+Output: A number
 
 Rules: 
 
-The first parameter must be an array.
-The second two parameters must be strings.
+The input must be one of three options: Player, Computer, or Tie (else)
 
-If there is only one parameter, the default is to join the elements with ', ' and place 'or ' before the last element.
-If there are two parameters, the second one is a delimiter.
-If there are three parameters, the third one replaces 'or '. Concat an extra space after the third argument.
-If there are no elements in the array, joinOr returns an empty string.
-If there is one element in the array, joinOr returns only the value.
-If there are two elements in the array, joinOr returns them with ' or ' as a delimiter.
+The output must be 1, added onto the existing number for Player or Computer,
+or, in the event of a tie, a 0 (repeat without changes).
 
+The match will repeat until someone wins 5 games, at which point the score
+returns to 0.
+
+Hint: Use a global constant to represent the number of games needed to win the match.
 
 Data Structure:
 
-Input:
+A function that takes in the winner of the game.
+Two variables, one for the Player's score, one for the Computer's.
 
-A function with up to three arguments.
+An if statement:
+  if the Player wins, which adds one to their score.
+  if the Computer wins, which adds one to their score.
+  Else, where nothing changes.
 
-The first argument is an array, which comes from the function emptySquares(board).
+Another if statement:
+  if player's score equals 5, log the player wins.
+  Same for computer.
 
-The second argument is a string, which will act as the delimiter.
+Input:                        Output:
 
-The third argument is also a string, and will always replace the final delimiter.
+keepScore(Player)             'Player: 1 Computer: 0'
+keepScore(Player) (times 5)   'Player wins the match!'
+keepScore(tie)                'Player: 0 Computer: 0'
 
-The third argument must have one additional whitespace added after it.
+Algorithm
 
-Output:
+keepScore(winner) {
 
-A string.
+let playerScore = 0
+let computerScore = 0
 
-
-Examples and Test Cases:
-
-Input:                           Output:
-
-joinOr([1, 2, 3]);               // => "1, 2, or 3"
-joinOr([1, 2, 3], '; ');         // => "1; 2; or 3"
-joinOr([1, 2, 3], ', ', 'and');  // => "1, 2, and 3"
-joinOr([]);                      // => ""
-joinOr([5]);                     // => "5"
-joinOr([1, 2]);                  // => "1 or 2"
-
-function joinOr() {
-  console.log(arguments)
-  const emptySpaces = arguments[0];
-  const lastNumber = emptySpaces[arguments.length];
-  const withoutLastNumber = emptySpaces.slice(0, lastNumber);
-  const delimiter = arguments[1];
-  const replaceOr = arguments[2];
-
-  if (arguments.length === 1) {
-    console.log(`${withoutLastNumber.join(', ')}, or ${lastNumber}`);
-  } else if (arguments.length === 2) {
-    console.log(`${withoutLastNumber.join(delimiter)}${delimiter} or ${lastNumber}`);
-  } else if (emptySpaces === []) {
-    console.log("");
-  } else if (arguments.length === 1) {
-    console.log(`${emptySpaces}`);
-  } else if (arguments.length === 2) {
-    console.log(`${emptySpaces[0]} or ${emptySpaces[1]}`);
-  }
+if (winner = 'Player') {
+  playerScore += 1
+} else if (winner = 'Computer') {
+  computerScore += 1
 }
 
-Algorithm:
-
-Declare a function with three arguments: openSquaresArr, delimiter, replaceOr.
-
-Let openSquaresArr equal the emptySquares(board)
-Let delimiter and replaceOr equal empty strings
-Let lastNumber equal openSquaresArr[openSquaresArr.length]
-Let withoutLastNumber equal openSquaresArr.slice(0, lastNumber)
-
-if !!delimiter and !!replaceOr equal false, return `${withoutLastNumber.join(', ')}, or ${lastNumber}` 
-if !!replaceOr equals false, return `${withoutLastNumber.join(delimiter)}{delimiter} or ${lastNumber}`
-if openSquaresArr === [], return ""
-if openSquaresArr.length === 1, return `${openSquaresArr}`
-if openSquaresArr.length === 2, return `${openSquaresArr[0]} or ${openSquaresArr[1]}`
-
-
-Looked at answer: The key that I was missing is that function parameters can be assigned values like variables.
-
-function joinOr(arr, delimiter = ', ', word = 'or') {
-  switch (arr.length) {
-    case 0:
-      return '';
-    case 1:
-      return `${arr[0]}`;
-    case 2:
-      return arr.join(` ${word} `);
-    default:
-      return arr.slice(0, arr.length - 1).join(delimiter) +
-             `${delimiter}${word} ${arr[arr.length - 1]}`;
-  }
+if (playerScore = 5) {
+  console.log('Player wins the match!)
+} else if (computerScore = 5) {
+  console.log('Computer wins the match!')
+}
 }
 
 */

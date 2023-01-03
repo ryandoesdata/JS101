@@ -1,7 +1,9 @@
+/* eslint-disable max-len */
 const readline = require('readline-sync');
 const INITIAL_MARKER = ' ';
 const HUMAN_MARKER = 'X';
 const COMPUTER_MARKER = 'O';
+const GAMES_TO_WIN = 2;
 
 function displayBoard(board) {
   console.clear();
@@ -140,6 +142,30 @@ function detectWinner(board) {
   return null;
 }
 
+function keepScore(winner) {
+
+  let playerScore;
+  let computerScore = 0;
+
+  if (winner === 'Player') {
+    playerScore += 1;
+  } else if (winner === 'Computer') {
+    computerScore += 1;
+  }
+
+  if (playerScore === GAMES_TO_WIN) {
+    console.log('Player wins the match!');
+    //playerScore = 0;
+    //computerScore = 0;
+  } else if (computerScore === GAMES_TO_WIN) {
+    console.log('Computer wins the match!');
+    //playerScore = 0;
+    //computerScore = 0;
+  }
+  console.log(`Player: ${playerScore} Computer: ${computerScore}`);
+  return playerScore;
+}
+
 function playerChoosesSquare(board) {
   let square;
 
@@ -185,6 +211,8 @@ while (true) {
   } else {
     prompt("It's a tie!");
   }
+
+  keepScore(detectWinner(board));
 
   prompt('Would you like to play again? y/n');
   let answer = readline.question().toLowerCase()[0];
