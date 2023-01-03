@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+/* eslint-disable max-lines-per-function */
 /* eslint-disable max-len */
 const readline = require('readline-sync');
 const INITIAL_MARKER = ' ';
@@ -142,31 +144,82 @@ function detectWinner(board) {
   return null;
 }
 
+function playerChoosesSquare(board) {
+  let square;
+
+  while (true) {
+    prompt(`Choose a square ${joinOr(emptySquares(board))}:`);
+    square = readline.question().trim();
+    if (emptySquares(board).includes(square)) break;
+
+    prompt("That's not a valid choice.");
+  }
+  board[square] = HUMAN_MARKER;
+}
+
+function computerChoosesSquare(board) {
+
+  let randomIndex = Math.floor(Math.random() * emptySquares(board).length);
+  let square = emptySquares(board)[randomIndex];
+
+  board[square] = COMPUTER_MARKER;
+}
 
 function keepScore(winner) {
-
   let playerScore = 0;
   let computerScore = 0;
 
-  if (winner === 'Player') {
-    playerScore += 1;
-  } else if (winner === 'Computer') {
-    computerScore += 1;
-  }
+  while ((playerScore || computerScore) !== GAMES_TO_WIN) {
 
-  if (playerScore === GAMES_TO_WIN) {
-    console.log('Player wins the match!');
-    //playerScore = 0;
-    //computerScore = 0;
-  } else if (computerScore === GAMES_TO_WIN) {
-    console.log('Computer wins the match!');
-    //playerScore = 0;
-    //computerScore = 0;
+    let board = initializeBoard();
+    displayBoard(board);
+
+    while (true) {
+      let board = initializeBoard();
+
+      while (true) {
+        displayBoard(board);
+
+        playerChoosesSquare(board);
+        if (someoneWon(board) || boardFull(board)) break;
+        computerChoosesSquare(board);
+        displayBoard(board);
+
+        if (someoneWon(board) || boardFull(board)) break;
+      }
+
+      displayBoard(board);
+
+      if (someoneWon(board)) {
+        prompt(`${detectWinner(board)} won!`);
+      } else {
+        prompt("It's a tie!");
+      }
+      if (winner === 'Player') {
+        playerScore += 1;
+      } else if (winner === 'Computer') {
+        computerScore += 1;
+      }
+      console.log(`Player: ${playerScore} Computer: ${computerScore}`);
+      if (playerScore === GAMES_TO_WIN) {
+        console.log('Player wins the match!');
+        //playerScore = 0;
+        //computerScore = 0;
+      } else if (computerScore === GAMES_TO_WIN) {
+        console.log('Computer wins the match!');
+        //playerScore = 0;
+        //computerScore = 0;
+      }
+      prompt('Would you like to play again? y/n');
+      let answer = readline.question().toLowerCase()[0];
+      if (answer !== 'y') break;
+    }
   }
-  console.log(`Player: ${playerScore} Computer: ${computerScore}`);
-  return playerScore;
 }
 
+keepScore(detectWinner(board));
+
+/*
 function playerChoosesSquare(board) {
   let square;
 
@@ -212,12 +265,12 @@ while (true) {
   } else {
     prompt("It's a tie!");
   }
+*/
 
-  keepScore(detectWinner(board));
-
+/*
   prompt('Would you like to play again? y/n');
   let answer = readline.question().toLowerCase()[0];
   if (answer !== 'y') break;
-}
+  */
 
 prompt('Thanks for playing!');
