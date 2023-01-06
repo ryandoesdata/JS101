@@ -229,9 +229,21 @@ while (true) {
     prompt("It's a tie!");
   }
 
+  //Loops invalid input when invalid input is entered followed by 'n'. Works otherwise.
   prompt('Would you like to play again? y/n');
   let answer = readline.question().toLowerCase()[0];
-  if (answer !== 'y') break;
+  if (answer === ('n' || 'N')) break;
+  else if (answer === ('y' || 'Y')) continue;
+  else {
+    while (true) {
+      prompt('Error, please enter valid input.');
+      prompt('Would you like to play again? y/n');
+      let answer = readline.question().toLowerCase()[0];
+      if (answer === ('y' || 'n')) break;
+      if (answer !== ('y' || 'n')) continue;
+    }
+    if (answer === ('n' || 'N')) break;
+  }
 }
 
 prompt('Thanks for playing!');

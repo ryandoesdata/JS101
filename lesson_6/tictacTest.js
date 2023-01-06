@@ -5,7 +5,7 @@ const INITIAL_MARKER = ' ';
 const HUMAN_MARKER = 'X';
 const COMPUTER_MARKER = 'O';
 const GAMES_TO_WIN = 2;
-const STARTING_PLAYER = 'choose';
+const STARTING_PLAYER = 'player';
 const WINNING_LINES = [
   [1, 2, 3], [4, 5, 6], [7, 8, 9], // rows
   [1, 4, 7], [2, 5, 8], [3, 6, 9], // columns
@@ -109,6 +109,21 @@ function findAtRiskSquare(line, board, marker) {
   return null;
 }
 
+/*
+function attackSquare(line, board) {
+  let markersInLine = line.map(square => board[square]);
+
+  if (markersInLine.filter(val => val === COMPUTER_MARKER).length === 2) {
+    let unusedSquare = line.find(square => board[square] === INITIAL_MARKER);
+    if (unusedSquare !== undefined) {
+      return unusedSquare;
+    }
+  }
+
+  return null;
+}
+*/
+
 function playerChoosesSquare(board) {
   let square;
 
@@ -122,6 +137,7 @@ function playerChoosesSquare(board) {
   board[square] = HUMAN_MARKER;
 }
 
+// eslint-disable-next-line max-statements
 function computerChoosesSquare(board) {
   let square;
   for (let index = 0; index < WINNING_LINES.length; index++) {
@@ -155,21 +171,61 @@ function computerChoosesSquare(board) {
 let board = initializeBoard();
 displayBoard(board);
 
+
 while (true) {
   let board = initializeBoard();
+  let response;
 
   while (true) {
     displayBoard(board);
-
-    playerChoosesSquare(board);
-    if (someoneWon(board) || boardFull(board)) break;
-    computerChoosesSquare(board);
-    displayBoard(board);
-
-    if (someoneWon(board) || boardFull(board)) break;
+      
+    if (STARTING_PLAYER === 'player') {
+      playerChoosesSquare(board);
+      if (someoneWon(board) || boardFull(board)) break;
+      computerChoosesSquare(board);
+      displayBoard(board);
+      if (someoneWon(board) || boardFull(board)) break;
+      
+    } else if (STARTING_PLAYER === 'computer') {
+      computerChoosesSquare(board);
+      displayBoard(board);
+      if (someoneWon(board) || boardFull(board)) break;
+      playerChoosesSquare(board);
+      if (someoneWon(board) || boardFull(board)) break;
+      
+    } else if (STARTING_PLAYER === 'choose') {
+      prompt('Who will go first? Enter P for player, C for computer.');
+      response = readline.question().trim();
+      if (response !== (('P') || ('C'))) {
+        while (true) {
+          prompt("That's not a valid choice.");
+          prompt('Who will go first? Enter P for player, C for computer.');
+          response = readline.question().trim();
+          if (response === (('P') || ('C'))) break;
+        }
+      }
+      if (response === 'P') {
+        while (true) {
+          playerChoosesSquare(board);
+          if (someoneWon(board) || boardFull(board)) break;
+          computerChoosesSquare(board);
+          displayBoard(board);
+          if (someoneWon(board) || boardFull(board)) break;
+        }
+        break;
+      }
+      if (response === 'C') {
+        while (true) {
+          computerChoosesSquare(board);
+          displayBoard(board);
+          if (someoneWon(board) || boardFull(board)) break;
+          playerChoosesSquare(board);
+          if (someoneWon(board) || boardFull(board)) break;
+        }
+        break;
+      }
+    }
   }
-
-  displayBoard(board);
 
   if (someoneWon(board)) {
     prompt(`${detectWinner(board)} won!`);
@@ -177,13 +233,17 @@ while (true) {
     prompt("It's a tie!");
   }
 
-  prompt('Would you like to play again? y/n');
-  let answer = readline.question().toLowerCase()[0];
-  if (answer !== 'y') break;
+  let answer;
+
+  while (true) {
+    console.log('Would you like to play again? y/n');
+    let answer = readline.question().toLowerCase()[0];
+    if (["y", "n"].includes(answer)) break;
+    console.log("not valid");
+  }
 }
 
-prompt('Thanks for playing!');
-
+console.log("Thanks for playing");
 
 /* MY COMPUTER DEFENCE FUNCTION
 
@@ -283,20 +343,4 @@ function joinOr(empties, delimiter, replaceOr) {
     console.log(`${withoutLastNumber.join(delimiter)}${delimiter}${replaceOr} ${lastNumber}`); // works
   }
 }
-
--------MY COMPUTER OFFENCE FUNCTION-------
-
-function attackSquare(line, board) {
-  let markersInLine = line.map(square => board[square]);
-
-  if (markersInLine.filter(val => val === COMPUTER_MARKER).length === 2) {
-    let unusedSquare = line.find(square => board[square] === INITIAL_MARKER);
-    if (unusedSquare !== undefined) {
-      return unusedSquare;
-    }
-  }
-
-  return null;
-}
-
 */
