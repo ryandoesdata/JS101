@@ -32,6 +32,18 @@ function displayBoard(board) {
   console.log('');
 }
 
+function alternatePlayer(string) {
+  return string === 'computer' ? "player" : "computer";
+}
+
+function chooseSquare(board, player) {
+  if (player === 'player') {
+    playerChoosesSquare(board);
+  } else if (player ==='computer') {
+    computerChoosesSquare(board);
+  }
+}
+
 function initializeBoard() {
   let board = {};
 
@@ -168,15 +180,12 @@ function computerChoosesSquare(board) {
   board[square] = COMPUTER_MARKER;
 }
 
-let board = initializeBoard();
-displayBoard(board);
-
 while (true) {
   let board = initializeBoard();
-  let response;
+  let currentPlayer;
+    
+  /* Use if starting player is fixed.
 
-  while (true) {
-    displayBoard(board);
     if (STARTING_PLAYER === 'player') {
       playerChoosesSquare(board);
       if (someoneWon(board) || boardFull(board)) break;
@@ -189,6 +198,30 @@ while (true) {
       if (someoneWon(board) || boardFull(board)) break;
       playerChoosesSquare(board);
       if (someoneWon(board) || boardFull(board)) break;
+
+    */
+
+// good user decider for starting player
+  while (true) {
+    console.log("Who is going to start? Choose computer or player");
+    currentPlayer = readline.question().trim();
+
+    if (["computer", "player"].includes(currentPlayer)) break;
+    console.log("Sorry, that's not a valid choice.");
+  }
+
+  while (true) {
+    displayBoard(board);
+    chooseSquare(board, currentPlayer);
+    currentPlayer = alternatePlayer(currentPlayer);
+    if (someoneWon(board) || boardFull(board)) {
+      displayBoard(board);
+      break;
+    }
+  }
+
+  /* My complicated user decider for starting player (only works for P or invalid choice. not C).
+
     } else if (STARTING_PLAYER === 'choose') {
       prompt('Who will go first? Enter P for player, C for computer.');
       response = readline.question().trim();
@@ -222,6 +255,8 @@ while (true) {
       }
     }
   }
+
+  */
 
   if (someoneWon(board)) {
     prompt(`${detectWinner(board)} won!`);
