@@ -183,7 +183,7 @@ function computerChoosesSquare(board) {
 while (true) {
   let board = initializeBoard();
   let currentPlayer;
-    
+
   /* Use if starting player is fixed.
 
     if (STARTING_PLAYER === 'player') {

@@ -1,0 +1,129 @@
+Initialize The Deck
+
+/*
+
+Input: A global variable of an array with 52 properties.
+
+Output
+
+Rules:
+
+Examples and Validation:
+
+let deck = [{2: 2}, {2: 2}, {2: 2}, {2: 2}, {3: 3}, {3: 3}, {3: 3}, {3: 3}, 
+{4: 4}, {4: 4}, {4: 4}, {4: 4}, {5: 5}, {5: 5}, {5: 5}, {5: 5}, {6: 6}, 
+{6: 6}, {6: 6}, {6: 6}, {7: 7}, {7: 7}, {7: 7}, {7: 7}, {8: 8}, {8: 8}, {8: 8}, 
+{8: 8}]
+
+Data Structure:
+
+let deck = [{2: 2}, {2: 2}, {2: 2}, {2: 2}, {3: 3}, {3: 3}, {3: 3}, {3: 3}, 
+{4: 4}, {4: 4}, {4: 4}, {4: 4}, {5: 5}, {5: 5}, {5: 5}, {5: 5}, {6: 6}, 
+{6: 6}, {6: 6}, {6: 6}, {7: 7}, {7: 7}, {7: 7}, {7: 7}, {8: 8}, {8: 8}, {8: 8}, 
+{8: 8}]
+
+Algorithm:
+
+Code:
+
+*/
+
+Deal cards to player and dealer
+
+/*
+
+Input: The deck variable.
+Output: four properties and a mutated deck
+
+Rules: 
+
+Examples and Validation: 
+
+52 properties in deck
+
+cards are dealt
+
+player has 2 properties, dealer has 2 properties, deck has 4 less properties.
+
+Data Structure:
+
+Player and dealer should be variables with one empty array each. Random dealt cards (key/values)
+will be pushed from the deck into the player and dealer's arrays.
+
+Algorithm:
+
+let player = []
+let dealer = []
+
+Push four random, spliced elements from the deck into each player's hand. This removes those
+element from the deck and puts it in their hand.
+
+Use a loop to push two cards into each hand. Or just copy paste the code so it does it twice?
+
+Code:
+
+let player = [];
+
+player.push(deck.splice(Math.floor(Math.random() * deck.length), 1));
+
+player = player.flat();
+
+console.log(deck);
+
+console.log(player);
+
+*/
+
+Player turn: hit or stay
+
+/*
+
+Input: Player input, pushing another card into the player's hand.
+Output: A mutated deck with one less card, and another element in player's hand.
+        The new card is added onto the value of player's hand.
+
+Rules: If the next card is an ace AND the value of the player's hand is greater than 11, ace will equal 1
+
+If the player's hand is greater than 11, all aces become equal to 1.
+
+Examples and Validation: 
+
+Player has a 4 and a 6 in their hand. Hand equals 10.
+Player decides to hit. 
+Player is dealt a 7.
+Player's hand now equals 17.
+
+Deck has one less card.
+
+Different Scenerio:
+
+Player has 4 and 7. Hand = 11.
+Player gets ace.
+Player's hand equals 21.
+
+Data Structure:
+
+Player's hand equals
+
+Algorithm:
+
+let player = []
+let dealer = []
+
+Push a random, spliced element from the deck into each player's hand. This removed that
+element from the deck and puts it in their hand.
+
+Code:
+
+let player = [];
+
+player.push(deck.splice(Math.floor(Math.random() * deck.length), 1));
+
+player = player.flat();
+
+console.log(deck);
+
+console.log(player);
+
+*/
+
