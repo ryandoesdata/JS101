@@ -82,11 +82,25 @@ Input: Player input, pushing another card into the player's hand.
 Output: A mutated deck with one less card, and another element in player's hand.
         The new card is added onto the value of player's hand.
 
-Rules: If the next card is an ace AND the value of the player's hand is greater than 11, ace will equal 1
+Rules for hit:
+
+New card adds onto the total value of player's hand.
+
+If the new total is over 21, player busts.
+
+If total is under 21, ask hit or stay again.
+
+If the next card is an ace AND the value of the player's hand is greater than 11, ace will equal 1
 
 If the player's hand is greater than 11, all aces become equal to 1.
 
+
+
 Examples and Validation: 
+
+Prompt player hit or stay.
+
+Player hits
 
 Player has a 4 and a 6 in their hand. Hand equals 10.
 Player decides to hit. 
@@ -95,23 +109,64 @@ Player's hand now equals 17.
 
 Deck has one less card.
 
+Repeat
+
+Player has a 4 and a 6 and a 7 in their hand. Hand equals 17.
+Player decides to stay.
+
+Break
+
 Different Scenerio:
 
 Player has 4 and 7. Hand = 11.
 Player gets ace.
 Player's hand equals 21.
 
+
+
 Data Structure:
 
-Player's hand equals
+Variable for points in hand.
+
+while loop
+
+Prompt user "You have x points. Enter hit or stay."
+valid input?
+
+if hit:
+
+Player's hand equals hand plus new card
+
+if stay:
+
+break
+
+
 
 Algorithm:
 
-let player = []
-let dealer = []
+let playerPoints = sum of both elements in playerHand
 
-Push a random, spliced element from the deck into each player's hand. This removed that
-element from the deck and puts it in their hand.
+while (true) {
+  while (true) {
+    Prompt user "You have x points. Enter hit or stay."
+    valid input? No
+    "That is not valid input"
+    valid input? Yes
+    break;
+  }
+
+if answer = hit:
+
+Player's hand equals hand plus new card
+
+if hand is greater than 21
+
+break
+
+if stay:
+
+break
 
 Code:
 
@@ -127,3 +182,12 @@ console.log(player);
 
 */
 
+function prompt(msg) {
+  console.log(`=> ${msg}`);
+}
+
+prompt(`You have ${playerTotal}. Would you like to hit or stay?`);
+let playerMove = readline.question().trim().toLowerCase;
+if (playerMove === "hit") {
+
+}
