@@ -182,12 +182,32 @@ console.log(player);
 
 */
 
-function prompt(msg) {
-  console.log(`=> ${msg}`);
+while (true) {
+  prompt(`You have ${playerTotal}. Dealer has ${dealerTotal}.`);
+  prompt('Would you like to hit or stay?');
+  let playerMove = readline.question().trim().toLowerCase();
+  if (playerMove === "hit") {
+    player = dealCards(deck, player, 1);
+    dealer = dealCards(deck, dealer, 1);
+    hit(player, playerHand);
+    hit(dealer, dealerHand);
+    displayHand ('Player', playerHand);
+    displayHand ('Dealer', dealerHand);
+    playerTotal = addCards(playerHand);
+    dealerTotal = addCards(dealerHand);
+  } else if (playerMove === "stay") {
+    prompt(`You have ${playerTotal}. Dealer has ${dealerTotal}.`);
+    if (playerTotal > dealerTotal) {
+      prompt('You win!'); // dealer should hit
+    } else if (dealerTotal > playerTotal) {
+      prompt('Dealer wins.');
+    }
+    break;
+  }
 }
 
-prompt(`You have ${playerTotal}. Would you like to hit or stay?`);
-let playerMove = readline.question().trim().toLowerCase;
-if (playerMove === "hit") {
+/* Ending scenerios:
 
-}
+Player wins: Player stays, dealer hits until bust (over 21)
+Dealer wins: Player hits until bust (over 21)
+Dealer wins: Player stays, dealer's score is over player's score.
