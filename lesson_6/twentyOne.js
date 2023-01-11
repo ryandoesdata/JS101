@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 const readline = require('readline-sync');
 
+// Stylizes prompt
 function prompt(msg) {
   console.log(`=> ${msg}`);
 }
@@ -20,7 +21,7 @@ let deck = [
   {J: 10}, {J: 10}, {J: 10}, {J: 10},
   {Q: 10}, {Q: 10}, {Q: 10}, {Q: 10},
   {K: 10}, {K: 10}, {K: 10}, {K: 10},
-  {A: 10}, {A: 10}, {A: 10}, {A: 10}
+  {A: 11}, {A: 11}, {A: 11}, {A: 11}
 ];
 
 // deal hands
@@ -38,19 +39,34 @@ function dealCards (deck, whoGoes, cards) {
   return whoGoes;
 }
 
-let playerHand = [];
-let dealerHand = [];
+let playerValues = [];
+let dealerValues = [];
 
-function getHand (whoGoes, whoseHand) {
+function getValues (whoGoes, whoseValues) {
   for (let i = 0; i < whoGoes.length; i++) {
-    whoseHand.push(Number(Object.values(whoGoes[i])));
+    whoseValues.push(Number(Object.values(whoGoes[i])));
   }
-  whoseHand = whoseHand.flat();
+  whoseValues = whoseValues.flat();
 }
 
-function hit (whoGoes, whoseHand) {
-  whoseHand.push(Number(Object.values(whoGoes[whoGoes.length - 1])));
-  whoseHand = whoseHand.flat();
+let playerKeys = [];
+let dealerKeys = [];
+
+function getKeys (whoGoes, whoseKeys) {
+  for (let i = 0; i < whoGoes.length; i++) {
+    whoseKeys.push(Object.keys(whoGoes[i]));
+  }
+  whoseKeys = whoseKeys.join(', ');
+}
+
+function hitValue (whoGoes, whoseValues) {
+  whoseValues.push(Number(Object.values(whoGoes[whoGoes.length - 1])));
+  whoseValues = whoseValues.flat();
+}
+
+function hitKey (whoGoes, whoseKeys) {
+  whoseKeys.push(Object.keys(whoGoes[whoGoes.length - 1]));
+  whoseKeys = whoseKeys.flat();
 }
 
 function addCards (hand) {
@@ -63,56 +79,77 @@ function addCards (hand) {
 player = dealCards (deck, player, 2);
 dealer = dealCards (deck, dealer, 2);
 
-getHand(player, playerHand);
-getHand(dealer, dealerHand);
+//start here for objects
+
+getValues(player, playerValues);
+getValues(dealer, dealerValues);
+getKeys(player, playerKeys);
+getKeys(dealer, dealerKeys);
 
 function displayWholeHand(who, whoseHand) {
-  console.log(`${who}'s hand: ${whoseHand.join(' and ')}`);
+  if (whoseHand.length === 2) {
+  prompt(`${who}'s hand: ${whoseHand.join(' and ')}`);
+  } else {
+    prompt(`${who}'s hand: ${whoseHand.slice(0, whoseHand.length - 1).join(', ')}, and ${whoseHand[whoseHand.length - 1]}`);
+  }
 }
 
 function displayDealerHand(who, whoseHand) {
-  console.log(`${who}'s hand: ${whoseHand[0]} and unknown card`);
+  prompt(`${who}'s hand: ${whoseHand[0]} and unknown card`);
 }
 
-displayWholeHand('Player', playerHand);
-displayDealerHand('Dealer', dealerHand);
+displayWholeHand('Player', playerKeys);
+displayDealerHand('Dealer', dealerKeys);
 
-let playerTotal = addCards(playerHand);
-let dealerTotal = addCards(dealerHand);
+let playerTotal = addCards(playerValues);
+let dealerTotal = addCards(dealerValues);
 
 while (true) {
+
+  let playerMove;
+
+  while (true) {
+
   prompt(`You have ${playerTotal}.`);
   prompt('Would you like to hit or stay?');
-  let playerMove = readline.question().trim().toLowerCase();
+  playerMove = readline.question().trim().toLowerCase();
+  if (["hit", "stay"].includes(playerMove)) break;
+  prompt("Sorry, that's not a valid choice.");
+  }
 
   if (playerMove === "hit") {
     player = dealCards(deck, player, 1);
-    hit(player, playerHand);
-    displayWholeHand('Player', playerHand);
-    playerTotal = addCards(playerHand);
+    hitValue(player, playerValues);
+    hitKey (player, playerKeys);
+    displayWholeHand('Player', playerKeys);
+    playerTotal = addCards(playerValues);
 
   } else if (playerMove === "stay") {
 
     while (dealerTotal < 18) {
       dealer = dealCards(deck, dealer, 1);
-      hit(dealer, dealerHand);
+      hitValue(dealer, dealerValues);
+      hitKey (dealer, dealerKeys);
       //displayWholeHand('Dealer', dealerHand);
-      dealerTotal = Number(addCards(dealerHand));
+      dealerTotal = Number(addCards(dealerValues));
       //prompt(`Dealer has ${dealerTotal}.`);
     }
 
-      if ((dealerTotal > playerTotal) && (dealerTotal <= 21)) {
-        displayWholeHand('Dealer', dealerHand);
-        prompt(`Dealer has ${dealerTotal}.`);
-        prompt("Dealer wins.");
-      } else if ((playerTotal > dealerTotal) && (playerTotal <= 21)) {
-        displayWholeHand('Dealer', dealerHand);
-        prompt(`Dealer has ${dealerTotal}.`);
-        prompt("You win!");
-      } else if (dealerTotal > 21) {
-        displayWholeHand('Dealer', dealerHand);
+      if (dealerTotal > 21) {
+        displayWholeHand('Dealer', dealerKeys);
         prompt(`Dealer has ${dealerTotal}.`);
         prompt("Dealer busts. You win!");
+      } else if (playerTotal > dealerTotal) {
+        displayWholeHand('Dealer', dealerKeys);
+        prompt(`Dealer has ${dealerTotal}.`);
+        prompt("You win!");
+      } else if (dealerTotal > playerTotal) {
+        displayWholeHand('Dealer', dealerKeys);
+        prompt(`Dealer has ${dealerTotal}.`);
+        prompt("Dealer wins.");
+      } else if (dealerTotal === playerTotal) {
+        displayWholeHand('Dealer', dealerKeys);
+        prompt(`It's a tie.`);
       }
 
     break;
