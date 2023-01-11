@@ -24,6 +24,16 @@ let deck = [
   {A: 11}, {A: 11}, {A: 11}, {A: 11}
 ];
 
+function switchAce (whoGoes, whoseTotal) {
+if (whoseTotal > 10) {
+  for (let i = 0; i < whoGoes.length; i++) {
+    if (Object.keys(whoGoes[i]) === 'A') {
+      Number(Object.values(whoGoes[i]) === 1);
+    }
+  }
+}
+}
+
 // deal hands
 
 let player = [];
@@ -123,6 +133,7 @@ while (true) {
     hitKey (player, playerKeys);
     displayWholeHand('Player', playerKeys);
     playerTotal = addCards(playerValues);
+    switchAce (player, playerTotal);
 
   } else if (playerMove === "stay") {
 
@@ -132,6 +143,7 @@ while (true) {
       hitKey (dealer, dealerKeys);
       //displayWholeHand('Dealer', dealerHand);
       dealerTotal = Number(addCards(dealerValues));
+      switchAce (dealer, dealerTotal);
       //prompt(`Dealer has ${dealerTotal}.`);
     }
 

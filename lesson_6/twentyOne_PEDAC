@@ -182,32 +182,56 @@ console.log(player);
 
 */
 
-while (true) {
-  prompt(`You have ${playerTotal}. Dealer has ${dealerTotal}.`);
-  prompt('Would you like to hit or stay?');
-  let playerMove = readline.question().trim().toLowerCase();
-  if (playerMove === "hit") {
-    player = dealCards(deck, player, 1);
-    dealer = dealCards(deck, dealer, 1);
-    hit(player, playerHand);
-    hit(dealer, dealerHand);
-    displayHand ('Player', playerHand);
-    displayHand ('Dealer', dealerHand);
-    playerTotal = addCards(playerHand);
-    dealerTotal = addCards(dealerHand);
-  } else if (playerMove === "stay") {
-    prompt(`You have ${playerTotal}. Dealer has ${dealerTotal}.`);
-    if (playerTotal > dealerTotal) {
-      prompt('You win!'); // dealer should hit
-    } else if (dealerTotal > playerTotal) {
-      prompt('Dealer wins.');
+Toggle Aces
+
+/*
+
+Input: An object literal
+Output: A mutated object
+
+Rules: 
+
+Examples and Validation: 
+
+52 properties in deck
+
+cards are dealt
+
+player has 2 properties, dealer has 2 properties, deck has 4 less properties.
+
+Data Structure:
+
+Player and dealer should be variables with one empty array each. Random dealt cards (key/values)
+will be pushed from the deck into the player and dealer's arrays.
+
+Algorithm:
+
+let player = []
+let dealer = []
+
+Push four random, spliced elements from the deck into each player's hand. This removes those
+element from the deck and puts it in their hand.
+
+Use a loop to push two cards into each hand. Or just copy paste the code so it does it twice?
+
+Code:
+
+let player = [];
+
+player.push(deck.splice(Math.floor(Math.random() * deck.length), 1));
+
+player = player.flat();
+
+console.log(deck);
+
+console.log(player);
+
+*/
+
+if (pointTotal > 10) {
+  for (i = 0; i < whoGoes.length; i++) {
+    if (Object.keys(whoGoes[i]) === 'A') {
+      Object.values(whoGoes[i]) === 1;
     }
-    break;
   }
 }
-
-/* Ending scenerios:
-
-Player wins: Player stays, dealer hits until bust (over 21)
-Dealer wins: Player hits until bust (over 21)
-Dealer wins: Player stays, dealer's score is over player's score.
