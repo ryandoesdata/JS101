@@ -186,28 +186,28 @@ Toggle Aces
 
 /*
 
-Input: An object literal
-Output: A mutated object
+Input: A number
+Output: A number
 
 Rules: 
 
 Examples and Validation: 
 
-52 properties in deck
-
-cards are dealt
-
-player has 2 properties, dealer has 2 properties, deck has 4 less properties.
+if total is greater than 20, A = 1
 
 Data Structure:
 
-Player and dealer should be variables with one empty array each. Random dealt cards (key/values)
-will be pushed from the deck into the player and dealer's arrays.
+conditional statement
 
 Algorithm:
 
-let player = []
-let dealer = []
+Take the array of player's and dealer's full object literals. Player and Dealer variables
+
+Use a conditional statement: when the total > 20, the 11s become 1s (values).
+
+Or the aces (keys) become 1s (values).
+
+
 
 Push four random, spliced elements from the deck into each player's hand. This removes those
 element from the deck and puts it in their hand.
@@ -234,4 +234,10 @@ if (pointTotal > 10) {
       Object.values(whoGoes[i]) === 1;
     }
   }
+}
+
+function aces (whoseValues, whoseTotal) {
+whoseValues.filter(value => value === 11).forEach(_ => {
+  if (whoseTotal > 21) whoseTotal -= 10;
+});
 }

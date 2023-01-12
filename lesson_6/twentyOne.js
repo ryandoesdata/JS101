@@ -1,3 +1,4 @@
+/* eslint-disable id-length */
 /* eslint-disable indent */
 const readline = require('readline-sync');
 
