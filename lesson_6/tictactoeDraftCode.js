@@ -98,3 +98,16 @@ function joinOr(empties, delimiter, replaceOr) {
   }
 }
 */
+
+while (true) {
+  prompt('Would you like to play again? y/n');
+  let answer = readline.question().toLowerCase()[0];
+  if (["y", "n"].includes(answer)) break;
+  prompt('Error, please enter valid input.');
+}
+if (answer === ('n')) break;
+else if (answer === ('y')) continue;
+//if (answer === ('n' || 'N')) break;
+}
+}
+prompt('Thanks for playing!');
