@@ -1,4 +1,6 @@
 const readline = require('readline-sync');
+const WINNING_NUMBER = 31;
+const DEALER_MIN = 27;
 
 function prompt(msg) {
   console.log(`=> ${msg}`);
@@ -24,11 +26,11 @@ let player = [];
 let dealer = [];
 
 function dealCards (deck, whoGoes, cards) {
-  let i = 0;
-  while (i < cards) {
+  let index = 0;
+  while (index < cards) {
     whoGoes.push(deck.splice(Math.floor(Math.random() * deck.length), 1));
     whoGoes = whoGoes.flat();
-    i++;
+    index++;
   }
   return whoGoes;
 }
@@ -37,8 +39,8 @@ let playerValues = [];
 let dealerValues = [];
 
 function getValues (whoGoes, whoseValues) {
-  for (let i = 0; i < whoGoes.length; i++) {
-    whoseValues.push(Number(Object.values(whoGoes[i])));
+  for (let index = 0; index < whoGoes.length; index++) {
+    whoseValues.push(Number(Object.values(whoGoes[index])));
   }
   whoseValues = whoseValues.flat();
 }
@@ -47,8 +49,8 @@ let playerKeys = [];
 let dealerKeys = [];
 
 function getKeys (whoGoes, whoseKeys) {
-  for (let i = 0; i < whoGoes.length; i++) {
-    whoseKeys.push(Object.keys(whoGoes[i]));
+  for (let index = 0; index < whoGoes.length; index++) {
+    whoseKeys.push(Object.keys(whoGoes[index]));
   }
   whoseKeys = whoseKeys.join(', ');
 }
@@ -68,7 +70,7 @@ function addCards (hand) {
   hand.reduce((accumulator, currentValue) => accumulator + currentValue
   );
   hand.filter(value => value === 11).forEach(_ => {
-    if (pointTotal > 21) pointTotal -= 10;
+    if (pointTotal > WINNING_NUMBER) pointTotal -= 10;
   });
   return pointTotal;
 }
@@ -113,55 +115,56 @@ while (true) {
   while (true) {
     while (true) {
       prompt(`You have ${playerTotal}.`);
-      if (playerTotal === 21) {
-        playerMove = "stay"; break;
-      } else {
-        prompt('Would you like to hit or stay?');
-        playerMove = readline.question().trim().toLowerCase();
-        if (["hit", "stay"].includes(playerMove)) break;
-        prompt("Sorry, that's not a valid choice.");
-      }
+      prompt('Would you like to hit or stay?');
+      playerMove = readline.question().trim().toLowerCase();
+      if (["hit", "stay"].includes(playerMove)) break;
+      prompt("Sorry, that's not a valid choice.");
+    }
 
     if (playerMove === "hit") {
       player = dealCards(deck, player, 1);
       hitValue(player, playerValues);
       hitKey(player, playerKeys);
       displayWholeHand('Player', playerKeys);
-      playerTotal = addCards(playerValues)
-      if (playerTotal < 22) {
+      playerTotal = addCards(playerValues);
+      if (playerTotal <= WINNING_NUMBER) {
         displayDealerHand('Dealer', dealerKeys);
       }
     } else if (playerMove === "stay") {
 
-      while (dealerTotal < 18) {
+      while (dealerTotal <= DEALER_MIN) {
         dealer = dealCards(deck, dealer, 1);
         hitValue(dealer, dealerValues);
         hitKey (dealer, dealerKeys);
         dealerTotal = Number(addCards(dealerValues));
       }
 
-      if (dealerTotal > 21) {
+      if (dealerTotal > WINNING_NUMBER) {
         displayWholeHand('Dealer', dealerKeys);
+        prompt(`You have ${playerTotal}.`);
         prompt(`Dealer has ${dealerTotal}.`);
         prompt("Dealer busts. You win!");
         break;
       } else if (playerTotal > dealerTotal) {
         displayWholeHand('Dealer', dealerKeys);
+        prompt(`You have ${playerTotal}.`);
         prompt(`Dealer has ${dealerTotal}.`);
         prompt("You win!");
         break;
       } else if (dealerTotal > playerTotal) {
         displayWholeHand('Dealer', dealerKeys);
+        prompt(`You have ${playerTotal}.`);
         prompt(`Dealer has ${dealerTotal}.`);
         prompt("Dealer wins.");
         break;
       } else if (dealerTotal === playerTotal) {
+        prompt(`You have ${playerTotal}.`);
         displayWholeHand('Dealer', dealerKeys);
         prompt(`It's a tie.`);
         break;
       }
     }
-    if (playerTotal > 21) {
+    if (playerTotal > WINNING_NUMBER) {
       displayWholeHand('Dealer', dealerKeys);
       prompt(`You have ${playerTotal}.`);
       prompt("Bust. Dealer wins.");
@@ -179,5 +182,5 @@ while (true) {
   else if (answer === ('y')) continue;
   //if (answer === ('n' || 'N')) break;
 }
-}
+
 prompt('Thanks for playing!');
