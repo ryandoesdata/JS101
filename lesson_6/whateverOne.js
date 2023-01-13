@@ -1,6 +1,7 @@
 const readline = require('readline-sync');
 const WINNING_NUMBER = 31;
 const DEALER_MIN = 27;
+const GAMES_TO_WIN = 5;
 
 function prompt(msg) {
   console.log(`=> ${msg}`);
@@ -87,6 +88,9 @@ function displayDealerHand(who, whoseHand) {
   prompt(`${who}'s hand: ${whoseHand[0]} and unknown card.`);
 }
 
+let gamesWonPlayer = 0;
+let gamesWonDealer = 0;
+
 while (true) {
   let playerMove;
   let answer;
@@ -105,6 +109,8 @@ while (true) {
   getValues(dealer, dealerValues);
   getKeys(player, playerKeys);
   getKeys(dealer, dealerKeys);
+
+  prompt(`You've won: ${gamesWonPlayer}. Dealer has won ${gamesWonDealer}. ${GAMES_TO_WIN} wins the match.`);
 
   displayWholeHand('Player', playerKeys);
   displayDealerHand('Dealer', dealerKeys);
@@ -144,18 +150,21 @@ while (true) {
         prompt(`You have ${playerTotal}.`);
         prompt(`Dealer has ${dealerTotal}.`);
         prompt("Dealer busts. You win!");
+        gamesWonPlayer += 1;
         break;
       } else if (playerTotal > dealerTotal) {
         displayWholeHand('Dealer', dealerKeys);
         prompt(`You have ${playerTotal}.`);
         prompt(`Dealer has ${dealerTotal}.`);
         prompt("You win!");
+        gamesWonPlayer += 1;
         break;
       } else if (dealerTotal > playerTotal) {
         displayWholeHand('Dealer', dealerKeys);
         prompt(`You have ${playerTotal}.`);
         prompt(`Dealer has ${dealerTotal}.`);
         prompt("Dealer wins.");
+        gamesWonDealer += 1;
         break;
       } else if (dealerTotal === playerTotal) {
         prompt(`You have ${playerTotal}.`);
@@ -168,8 +177,18 @@ while (true) {
       displayWholeHand('Dealer', dealerKeys);
       prompt(`You have ${playerTotal}.`);
       prompt("Bust. Dealer wins.");
+      gamesWonDealer += 1;
       break;
     }
+  }
+  if (gamesWonDealer === GAMES_TO_WIN) {
+    prompt("Dealer wins the match.");
+    gamesWonPlayer = 0;
+    gamesWonDealer = 0;
+  } else if (gamesWonPlayer === GAMES_TO_WIN) {
+    prompt("You win the match!");
+    gamesWonPlayer = 0;
+    gamesWonDealer = 0;
   }
 
   while (true) {
@@ -180,7 +199,6 @@ while (true) {
   }
   if (answer === ('n')) break;
   else if (answer === ('y')) continue;
-  //if (answer === ('n' || 'N')) break;
 }
 
 prompt('Thanks for playing!');
