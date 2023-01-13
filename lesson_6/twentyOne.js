@@ -73,14 +73,6 @@ function addCards (hand) {
   return pointTotal;
 }
 
-player = dealCards (deck, player, 2);
-dealer = dealCards (deck, dealer, 2);
-
-getValues(player, playerValues);
-getValues(dealer, dealerValues);
-getKeys(player, playerKeys);
-getKeys(dealer, dealerKeys);
-
 function displayWholeHand(who, whoseHand) {
   if (whoseHand.length === 2) {
     prompt(`${who}'s hand: ${whoseHand.join(' and ')}.`);
@@ -93,66 +85,100 @@ function displayDealerHand(who, whoseHand) {
   prompt(`${who}'s hand: ${whoseHand[0]} and unknown card.`);
 }
 
-displayWholeHand('Player', playerKeys);
-displayDealerHand('Dealer', dealerKeys);
-
-let playerTotal = addCards(playerValues);
-let dealerTotal = addCards(dealerValues);
-
 while (true) {
   let playerMove;
+  let answer;
+
+  player = [];
+  dealer = [];
+  playerValues = [];
+  playerKeys = [];
+  dealerValues = [];
+  dealerKeys = [];
+
+  player = dealCards (deck, player, 2);
+  dealer = dealCards (deck, dealer, 2);
+
+  getValues(player, playerValues);
+  getValues(dealer, dealerValues);
+  getKeys(player, playerKeys);
+  getKeys(dealer, dealerKeys);
+
+  displayWholeHand('Player', playerKeys);
+  displayDealerHand('Dealer', dealerKeys);
+
+  let playerTotal = addCards(playerValues);
+  let dealerTotal = addCards(dealerValues);
 
   while (true) {
+    while (true) {
+      prompt(`You have ${playerTotal}.`);
+      prompt('Would you like to hit or stay?');
+      playerMove = readline.question().trim().toLowerCase();
+      if (["hit", "stay"].includes(playerMove)) break;
+      prompt("Sorry, that's not a valid choice.");
+    }
 
-    prompt(`You have ${playerTotal}.`);
-    prompt('Would you like to hit or stay?');
-    playerMove = readline.question().trim().toLowerCase();
-    if (["hit", "stay"].includes(playerMove)) break;
-    prompt("Sorry, that's not a valid choice.");
-  }
+    if (playerMove === "hit") {
+      player = dealCards(deck, player, 1);
+      hitValue(player, playerValues);
+      hitKey(player, playerKeys);
+      displayWholeHand('Player', playerKeys);
+      playerTotal = addCards(playerValues);
+      if (playerTotal < 22) {
+        displayDealerHand('Dealer', dealerKeys);
+      }
+    } else if (playerMove === "stay") {
 
-  if (playerMove === "hit") {
-    player = dealCards(deck, player, 1);
-    hitValue(player, playerValues);
-    hitKey (player, playerKeys);
-    displayWholeHand('Player', playerKeys);
-    playerTotal = addCards(playerValues);
+      while (dealerTotal < 18) {
+        dealer = dealCards(deck, dealer, 1);
+        hitValue(dealer, dealerValues);
+        hitKey (dealer, dealerKeys);
+        dealerTotal = Number(addCards(dealerValues));
+      }
+
+      if (dealerTotal > 21) {
+        displayWholeHand('Dealer', dealerKeys);
+        prompt(`You have ${playerTotal}.`);
+        prompt(`Dealer has ${dealerTotal}.`);
+        prompt("Dealer busts. You win!");
+        break;
+      } else if (playerTotal > dealerTotal) {
+        displayWholeHand('Dealer', dealerKeys);
+        prompt(`You have ${playerTotal}.`);
+        prompt(`Dealer has ${dealerTotal}.`);
+        prompt("You win!");
+        break;
+      } else if (dealerTotal > playerTotal) {
+        displayWholeHand('Dealer', dealerKeys);
+        prompt(`You have ${playerTotal}.`);
+        prompt(`Dealer has ${dealerTotal}.`);
+        prompt("Dealer wins.");
+        break;
+      } else if (dealerTotal === playerTotal) {
+        prompt(`You have ${playerTotal}.`);
+        displayWholeHand('Dealer', dealerKeys);
+        prompt(`It's a tie.`);
+        break;
+      }
+    }
     if (playerTotal > 21) {
       displayWholeHand('Dealer', dealerKeys);
-    } else {displayDealerHand('Dealer', dealerKeys)}
-
-  } else if (playerMove === "stay") {
-
-    while (dealerTotal < 18) {
-      dealer = dealCards(deck, dealer, 1);
-      hitValue(dealer, dealerValues);
-      hitKey (dealer, dealerKeys);
-      dealerTotal = Number(addCards(dealerValues));
+      prompt(`You have ${playerTotal}.`);
+      prompt("Bust. Dealer wins.");
+      break;
     }
-
-    if (dealerTotal > 21) {
-      displayWholeHand('Dealer', dealerKeys);
-      prompt(`Dealer has ${dealerTotal}.`);
-      prompt("Dealer busts. You win!");
-    } else if (playerTotal > dealerTotal) {
-      displayWholeHand('Dealer', dealerKeys);
-      prompt(`Dealer has ${dealerTotal}.`);
-      prompt("You win!");
-    } else if (dealerTotal > playerTotal) {
-      displayWholeHand('Dealer', dealerKeys);
-      prompt(`Dealer has ${dealerTotal}.`);
-      prompt("Dealer wins.");
-    } else if (dealerTotal === playerTotal) {
-      displayWholeHand('Dealer', dealerKeys);
-      prompt(`It's a tie.`);
-    }
-
-    break;
   }
 
-  if (playerTotal > 21) {
-    prompt(`You have ${playerTotal}.`);
-    prompt("Bust. Dealer wins.");
-    break;
+  while (true) {
+    prompt('Would you like to play again? y/n');
+    answer = readline.question().toLowerCase()[0];
+    if (["y", "n"].includes(answer)) break;
+    prompt('Error, please enter valid input.');
   }
+  if (answer === ('n')) break;
+  else if (answer === ('y')) continue;
+  //if (answer === ('n' || 'N')) break;
 }
+
+prompt('Thanks for playing!');
