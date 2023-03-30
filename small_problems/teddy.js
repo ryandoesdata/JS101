@@ -1,6 +1,6 @@
-/*let teddy = (20 + (Math.floor(101 * (Math.random()))));
+let teddy = (20 + (Math.floor(101 * (Math.random()))));
 
-console.log(teddy);*/
+console.log(teddy);
 
 function randomBetween(min, max) {
   if ((max - min) >= 0) {
