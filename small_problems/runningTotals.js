@@ -6,7 +6,6 @@ function runningTotal(arr) {
   for (let i = 0; i < arr.length; i++) {
     currentNum = arr[i];
     total += currentNum;
-    console.log(total);
     newArr.push(total);
   }
   console.log(newArr);
