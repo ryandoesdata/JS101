@@ -1,9 +1,40 @@
-let arr = ['first', 'second'];
+let myPets = {
+  dogs: [
+    { name: "phanouris", breed: "english setter" },
+    { name: "luna", breed: "mongrel" },
+  ],
+  birds: [
+    { name: "lot", breed: "yellow-faced parrot" }
+  ],
+  fish: [
+    { name: "goldin", breed: "goldfish" }
+  ],
+  cats: [
+    { name: "louie", breed: "british shorthair" },
+    { name: "zuzu", breed: "moggie" }
+  ]
+};
 
-function mutateArr(parameter) {
-  parameter.push('third');
+let petsArr = [];
+let clonedPets = JSON.parse(JSON.stringify(myPets));
+
+for (let type in clonedPets) {
+
+  let petType = { type, pets: [] };
+
+  for (let i = 0; i < clonedPets[type].length; i += 1) {
+
+    petType.pets.push(clonedPets[type][i]);
+
+  }
+  petsArr.push(petType);
 }
 
-mutateArr(arr);
+//console.log(petsArr[0].pets[1] === myPets.dogs[1]); // false
 
-console.log(arr);
+let yippy = petsArr
+  .map((obj) => obj.pets)
+  .flat();
+  //.find((pet) => pet.name === "yippy" && pet.breed === "canary");
+
+console.log(yippy);
