@@ -1,29 +1,19 @@
-function reverse(list) {
+function reverse (list) {
+  let j = list.length - 1;
+  let placeholder;
 
-  let last = list.length - 1;
-
-  while (last >= 0) {
-    list.push(list[last]);
-    last--;
-  }
-
-  if (list.length === 2) {
-    list.shift(0);
-
-  } else {
-
-    while (last <= (list.length / 2)) {
-      list.shift(0);
-      last++;
-    }
-
+  for (let i = 0; i < (list.length - 1) / 2; i += 1) {
+    placeholder = list[i];
+    list[i] = list[j];
+    list[j] = placeholder;
+    j--;
   }
   return list;
 }
 
 
 
-console.log(reverse([1, 2, 3]));
+console.log(reverse([1, 3]));
 
 let list = [1, 2, 3, 4];
 let result = reverse(list);

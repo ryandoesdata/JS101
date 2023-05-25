@@ -1,10 +1,10 @@
 function sequence(num) {
   let arr = [];
-  let idx = 1;
+  let count = 1;
 
-  while (idx <= num) {
-    arr.push(idx);
-    idx++;
+  while (count <= num) {
+    arr.push(count);
+    count++;
   }
   return arr;
 }

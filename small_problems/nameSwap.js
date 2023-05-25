@@ -4,11 +4,10 @@ function swapName(string) {
 
 swapName('Joe Roberts');    // "Roberts, Joe"
 
-function swapNameWithMiddle(string) {
-  let withoutLast = string.split(' ');
-  let lastName = string.split(' ').pop();
-
-  return `${lastName}, ${withoutLast.join(' ')}`;
+function swapName (string) {
+  let arr = string.split(' ');
+  return `${arr.pop()}, ${arr.join(' ')}`;
 }
 
-console.log(swapNameWithMiddle('Karl Oskar Henriksson Ragvals'));    // "Ragvals, Karl Oskar Henriksson"
+
+console.log(swapName('Karl Oskar Henriksson Ragvals'));    // "Roberts, Joe"

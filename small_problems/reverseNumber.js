@@ -1,7 +1,4 @@
-function reverseNumber(num) {
-  console.log(String(num).split('').reverse().join('').replace(/^0+/,""));
-}
-
+let reverseNumber = num => Number([...String(num)].reverse().join(''));
 
 reverseNumber(12345);    // 54321
 reverseNumber(12213);    // 31221

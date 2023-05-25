@@ -1,13 +1,12 @@
-function reverseWords(string) {
-  let arr = string.split(' ');
-  return arr.map((word) => {
+let reverseWords = string =>
+
+  string.split(' ').map((word) => {
     if (word.length >= 5) {
       return word.split('').reverse().join('');
+    } else {
+      return word;
     }
-    return word;
   }).join(' ');
-}
-
 
 reverseWords('Professional');             // "lanoisseforP"
 reverseWords('Walk around the block');    // "Walk dnuora the kcolb"

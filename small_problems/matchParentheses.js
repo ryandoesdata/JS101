@@ -1,35 +1,26 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable max-len */
-function isBalanced(string) {
-  let chars = ["(", ")", '"', "'", "{", "}", "[", "]"];
-  let charsArr = string.split('').filter(char => chars.includes(char));
-  let rightChars = ["(", "[", "{",];
-  let leftChars = [")", "]", "}"];
-  let eitherChars = ["'", '"'];
-  let rightChar = charsArr.filter(char => rightChars.includes(char));
-  let leftChar = charsArr.filter(char => leftChars.includes(char));
-  let eitherChar = charsArr.filter(char => eitherChars.includes(char));
+function isBalanced (string) {
 
-  function balanceCheck(right, left, all, charOne, charTwo) {
-    if ((right.length === left.length) && (all[0] !== charOne) && (all[all.length - 1] !== charTwo)) {
-      return true;
+  function balanceCheck(charOne, charTwo) {
+    let arr = string.split("").filter(char => char === charOne || char === charTwo);
+    let idx = 0;
+
+    while (idx < arr.length) {
+      if ((arr[idx] === charOne) && (arr[idx + 1]) === charTwo) {
+        arr.splice(idx, 2);
+        idx = 0;
+      } else {
+        idx += 1;
+      }
     }
-    return false;
+
+    return !arr.length;
   }
 
-  function quoteCheck(arr) {
-    return arr.length % 2 === 0;
-  }
-
-  let paraCheck = balanceCheck(rightChar, leftChar, charsArr, ")", "(");
-  let curlyCheck = balanceCheck(rightChar, leftChar, charsArr, "{", "}");
-  let bracketCheck = balanceCheck(rightChar, leftChar, charsArr, "[", "]");
-  let otherCheck = quoteCheck(eitherChar);
-
-  if ((paraCheck === true) && (curlyCheck === true) && (bracketCheck === true) && (otherCheck === true)) {
-    return true;
-  }
-  return false;
+  return balanceCheck("(", ")") &&
+         balanceCheck("[", "]") &&
+         balanceCheck("{", "}") &&
+         balanceCheck("'", "'") &&
+         balanceCheck('"', '"');
 }
 
 console.log(isBalanced("What (is)'' this?") === true);
