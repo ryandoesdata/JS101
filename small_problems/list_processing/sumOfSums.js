@@ -1,16 +1,10 @@
 function sumOfSums(arr) {
-  let newArr = [];
-  let idx = 0;
-  let currentValue = 0;
-
-  while (idx < arr.length) {
-    currentValue += arr[idx];
-    newArr.push(currentValue);
-    idx += 1;
+  let arr2 = [];
+  for (let i = 0; i <= arr.length; i += 1) {
+    arr2.push(arr.slice(0, i).reduce((a, b) => a + b, 0));
   }
-
-  console.log(newArr.reduce((accum, num) => accum + num));
-}
+  return arr2.reduce((a, b) =>  a + b, 0);
+ }
 
 sumOfSums([3, 5, 2]);        // (3) + (3 + 5) + (3 + 5 + 2) --> 21
 sumOfSums([1, 5, 7, 3]);     // (1) + (1 + 5) + (1 + 5 + 7) + (1 + 5 + 7 + 3) --> 36

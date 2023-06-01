@@ -1,6 +1,7 @@
 function letterCaseCount (string) {
   let obj = {};
   let upperCaseString = string.replace(/[^A-Z]/g, "");
+  console.log(upperCaseString);
   let lowerCaseString = string.replace(/[^a-z]/g, "");
   let specialString = string.replace(/[a-zA-Z]/g, "");
 
@@ -8,7 +9,7 @@ function letterCaseCount (string) {
   obj.uppercase = upperCaseString.length;
   obj.neither = specialString.length;
 
-  return obj;
+  console.log(obj);
 }
 
 letterCaseCount('abCdef 123');  // { lowercase: 5, uppercase: 1, neither: 4 }

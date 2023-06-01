@@ -1,4 +1,4 @@
-/*
+
 function buyFruit (arr) {
   let list = [];
   arr.forEach((ele) => {
@@ -9,20 +9,6 @@ function buyFruit (arr) {
     }
   });
   console.log(list);
-}
-
-
-function buyFruit(arr) {
-  let fruits = [];
-  arr.forEach((nestedArr) => {
-    nestedArr.forEach((value) => {
-      while (nestedArr[1] !== 0) {
-        fruits.push(value);
-        nestedArr[1] -= 1;
-      }
-    });
-  });
-  console.log(fruits);
 }
 
 buyFruit([['apple', 3], ['orange', 1], ['banana', 2]]);

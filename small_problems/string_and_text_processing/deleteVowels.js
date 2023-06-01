@@ -1,13 +1,5 @@
-function removeVowels (arr) {
-  const VOWELS = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
-  let filteredArr = [];
-
-  arr.forEach((words) => {
-    filteredArr.push(words.split('').filter(char => !VOWELS.includes(char)).join(''));
-  });
-
-  return filteredArr;
-}
+let removeVowels = arr =>
+  arr.map(string => string.replace(/[aeiou]/gi, ""));
 
 removeVowels(['abcdefghijklmnopqrstuvwxyz']);         // ["bcdfghjklmnpqrstvwxyz"]
 removeVowels(['green', 'YELLOW', 'black', 'white']);  // ["grn", "YLLW", "blck", "wht"]

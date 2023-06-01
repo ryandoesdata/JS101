@@ -1,31 +1,25 @@
 function leadingSubstrings(string) {
-  let arr = [];
-  let idx = 1;
+  let arr = []
 
-  while (idx <= string.length) {
-    arr.push(string.substring(0, idx));
-    idx += 1;
+  for (let i = 1; i <= string.length; i += 1) {
+    arr.push(string.substring(0, i))
   }
   return arr;
 }
 
-function substrings(string) {
+function allSubstrings(string) {
   let arr = [];
-
-  while (string.length > 0) {
-    arr.push(leadingSubstrings(string));
-    string = string.substring(1);
+  for (let i = 0; i < string.length; i += 1) {
+    arr.push(leadingSubstrings(string.substring(i, string.length)))
   }
   return arr.flat();
 }
 
-function isPalindrome (word) {
-  return word.length > 1 && word === word.split("").reverse().join("");
-}
+let isPalindrome = word =>
+  ((word.length > 1) && (word === word.split('').reverse().join('')));
 
-function palindromes(string) {
-  console.log(substrings(string).filter(isPalindrome));
-}
+let palindromes = string =>
+  allSubstrings(string).filter(words => isPalindrome(words));
 
 palindromes('abcd');       // []
 palindromes('madam');      // [ "madam", "ada" ]

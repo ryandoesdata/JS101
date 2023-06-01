@@ -1,18 +1,14 @@
-function wordLengths(string) {
-  if (string === undefined || string === '') {
-    return '[]';
-  }
+let wordLengths = string => string? 
 
-  return string
-    .split(" ")
-    .map(words => `${words} ${words.length}`);
-}
+string.split(' ').map(word => `${word} ${word.length}`)
+:
+[]
 
 
-console.log(wordLengths('cow sheep chicken'));
+wordLengths('cow sheep chicken');
 // ["cow 3", "sheep 5", "chicken 7"]
 
-console.log(wordLengths('baseball hot dogs and apple pie'));
+wordLengths('baseball hot dogs and apple pie');
 // ["baseball 8", "hot 3", "dogs 4", "and 3", "apple 5", "pie 3"]
 
 wordLengths("It ain't easy, is it?");
@@ -21,5 +17,5 @@ wordLengths("It ain't easy, is it?");
 wordLengths('Supercalifragilisticexpialidocious');
 // ["Supercalifragilisticexpialidocious 34"]
 
-console.log(wordLengths(''));      // []
+wordLengths('');      // []
 wordLengths();        // []
