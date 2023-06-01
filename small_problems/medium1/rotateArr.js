@@ -1,19 +1,18 @@
-function rotateArray (arr) {
-
-  if (Array.isArray(arr) === false) {
-    console.log(undefined);
-  } else if (arr.length === 0) {
-    console.log([]);
-  } else if (Array.isArray(arr) === true) {
-    let newArr = [];
-    let arrCopy = arr.slice();
-
-    newArr.push(arrCopy.shift());
-    newArr.unshift(arrCopy);
-    console.log(newArr.flat());
-  } else {
-    console.log(undefined);
+function rotateArray(arr) {
+  if (!Array.isArray(arr)) {
+    return undefined;
+  } 
+  
+  if (arr.length === 0) {
+    return [];
   }
+  
+  let newArr = [];
+  for (let i = 1; i < arr.length; i += 1) {
+    newArr.push(arr[i]);
+  }
+  newArr.push(arr[0]);
+  return newArr;
 }
 
 rotateArray([7, 3, 5, 2, 9, 1]);       // [3, 5, 2, 9, 1, 7]
