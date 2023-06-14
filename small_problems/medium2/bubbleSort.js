@@ -22,6 +22,20 @@ that means everything is sorted.
 */
 
 function bubbleSort(arr) {
+  let test = true;
+
+  while (test) {
+    test = false;
+    for (let i = 0; i < arr.length; i += 1) {
+      if (arr[i] > arr[i + 1]) {
+        [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
+        test = true;
+      }
+    }
+  }
+}
+/*
+function bubbleSort(arr) {
   let i = 0;
   let placeholder;
 
@@ -37,6 +51,7 @@ function bubbleSort(arr) {
   }
   return arr;
 }
+*
 
 let array1 = [5, 3];
 bubbleSort(array1);

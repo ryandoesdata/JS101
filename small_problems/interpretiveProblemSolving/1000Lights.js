@@ -47,3 +47,53 @@ function lightsOn(lights) {
 }
 
 console.log(lightsOn(29));
+
+
+/* ALTERNATIVE 6/14/2023
+
+/* input: a number
+output: an array
+rules: every pass of toggling lights increases the starting point and the muliple by 1.
+-----------------------------------------------------------
+
+Test cases are provided
+-----------------------------------------------------------
+
+Data structures:
+A loop
+A toggle variable with a boolean value. Or simply toggle the numbers from positive to negative
+Spread syntax to populate an array with all the values.
+-----------------------------------------------------------
+
+Algorithm:
+create an array with integers 1 through num
+initialize a counter variable with a value of 2
+declare a for loop to end when counter equals array.length;
+if arr[i] % counter === 0
+arr[i] *= -1
+filter for positive numbers;
+-----------------------------------------------------------
+
+Code:
+*/
+
+function lightsOn(switches) {
+  let arr = [];
+  let i = 1;
+  while (i <= switches) {
+    arr.push(-i);
+    i += 1;
+  }
+
+  for (let j = 1; j <= arr.length; j += 1) {
+    arr.forEach((ele) => {
+      if ((ele % j) === 0) {
+        arr[arr.indexOf(ele)] *= -1;
+      }
+    });
+  }
+  console.log(arr.filter(ele => ele > 0));
+}
+
+lightsOn(100); 
+

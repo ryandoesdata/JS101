@@ -29,14 +29,17 @@ repeat until the array length is 1, using a for loop.
 */
 let yellowPages = ['Apple Store', 'Bags Galore', 'Bike Store', 'Donuts R Us', 'Eat a Lot', 'Good Food', 'Pasta Place', 'Pizzeria', 'Tiki Lounge', 'Zooper'];
 function binarySearch(arr, val) {
-  while() {
-    let mid = arr.length / 2;
+  let high = arr.length - 1;
+  let low = 0;
+
+  while(low <= high) {
+    let mid = low + Math.floor((high - low) / 2);
     if (arr[mid] === val) {
       return mid;
     } else if (val > arr[mid]) {
-      arr = arr.slice(mid);
+      low = mid + 1;
     } else {
-      arr = arr.slice(0, mid);
+      high = mid - 1;
     }
   }
   return -1;

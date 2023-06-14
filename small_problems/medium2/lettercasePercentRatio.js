@@ -1,58 +1,32 @@
-/* eslint-disable max-lines-per-function */
-/* Understand the problem
+/*
 input: a string
-output: an object literal
-
-rules:
-the output will be an object with three properties
-first is the percent of letters from the string that are lowercase
-second is the percentage that are uppercase
-third is the percent that are neither.
-
-the keys will be "lowercase", "uppercase", and "neither"
-the values will be strings with numerical digits with two decimal places
-
-Examples are provided
-
-Data structures:
-an empty object
-a variable for the length of the string
-regex to find the amount of lower, upper, and neither characters
-
-algorithm:
-
-initialize an empty object literal
-initialize a variable for the argument's length property minus whitespace
-initialize variables for amount of each character category using regex
-get the percent value by divided by the length variable and rounding to two decimals.
-pad the end with two zeros
-append the properties for each character category to the object
+output: an object
+rules: the object contains the percentage of letters that are uppercase, lowercase, or neither.
 */
 
 function letterPercentages(string) {
   let obj = {};
-  let stringLength = string.length;
-  let lowerCasePercent;
-  let upperCasePercent;
-  let neitherPercent;
-
-  function getPercent(match) {
-    let charCat;
-    if (match === null) {
-      charCat = "0.00";
-    } else {
-      charCat = String((((match).join('').length / stringLength) * 100).toFixed(2));
-    }
-    return charCat;
+  let length = string.length;
+  let lowercaseArr = string.match(/[a-z]/g);
+  
+  let uppercaseArr = string.match(/[A-Z]/g);
+  
+  if (!lowercaseArr) {
+    lowercase = 0;
+  } else {
+    lowercase = lowercaseArr.length;
+  }
+  if (!uppercaseArr) {
+    uppercase = 0;
+  } else {
+    uppercase = uppercaseArr.length;
   }
 
-  lowerCasePercent = getPercent(string.match(/[a-z]+/g));
-  upperCasePercent = getPercent(string.match(/[A-Z]+/g));
-  neitherPercent = getPercent(string.match(/[^a-zA-Z]+/g));
-
-  obj["lowercase"] = lowerCasePercent;
-  obj["uppercase"] = upperCasePercent;
-  obj["neither"] = neitherPercent;
+  let neither = length - (uppercase + lowercase);
+  
+  obj["lowercase"] = (lowercase / length * 100).toFixed(2);
+  obj["uppercase"] = (uppercase / length * 100).toFixed(2);
+  obj["neither"] = (neither / length * 100).toFixed(2);
 
   console.log(obj);
 }
@@ -65,4 +39,3 @@ letterPercentages('AbCd +Ef');
 
 letterPercentages('123');
 // { lowercase: "0.00", uppercase: "0.00", neither: "100.00" }
-

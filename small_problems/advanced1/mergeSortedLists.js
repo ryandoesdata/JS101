@@ -10,22 +10,16 @@ original arrays must not be mutated.
 
 */
 
-function merge(arr, arr2) {
-  let newArr = arr.concat(arr2);
-  let i = 0;
-  let j = 0;
-  let placeholder;
+function merge(array1, array2) {
+  let copy1 = array1.slice();
+  let copy2 = array2.slice();
+  let result = [];
 
-  while (j < newArr.length) {
-    if (newArr[j] > newArr[j + 1]) {
-      placeholder = newArr[j + 1];
-      newArr[j + 1] = newArr[j];
-      newArr[j] = placeholder;
-      j = 0;
-    }
-    j += 1;
+  while (copy1.length > 0 && copy2.length > 0) {
+    result.push(copy1[0] <= copy2[0] ? copy1.shift() : copy2.shift());
   }
-  console.log(newArr);
+
+  return result.concat(copy1.length === 0 ? copy2 : copy1);
 }
 
 merge([1, 5, 9], [2, 6, 8]);      // [1, 2, 5, 6, 8, 9]

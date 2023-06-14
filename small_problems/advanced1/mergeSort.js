@@ -1,82 +1,37 @@
-/* 
-understanding the problem
-input: an array
+/* input: an array
 output: an array
+rules: use recursion to break down the array and build it up again, but sorted.
 
-rules:
-function must use the Merge Sort recursive sorting algorithm.
-Merge sort breaks down an array's elements into nested subarrays,
-then puts them back together in sorted order.
+examples are provided
 
-examples and test cases provided.
+data structures: use a stopping condition for when the length of the array === 1,
 
-data structures:
-something to seperate the elements... push? push could also sort them
-something to put them back together... concat
-something to flatten them, flat.
-need a stopping condition
-use part of the merge function below.
-
-algorithm:
-
-a stopping condition where if counter = 
-return 
-concat
-return something that could sort it and combine it...concat?
-
-*/
-function merge(arr, arr2) {
-  let newArr = arr.concat(arr2);
-  let i = 0;
-  let j = 0;
-  let placeholder;
-
-  while (j < newArr.length) {
-    if (newArr[j] > newArr[j + 1]) {
-      placeholder = newArr[j + 1];
-      newArr[j + 1] = newArr[j];
-      newArr[j] = placeholder;
-      j = 0;
-    }
-    j += 1;
-  }
-  console.log(newArr);
-}
-/*
-function fibonacci(nth) {
-  if (nth <= 2) {
-    return 1;
-  }
-  return fibonacci(nth - 1) + fibonacci(nth - 2);
-}
-
-console.log(fibonacci(50));
-
-
-let arr = [9, 5, 7, 1];
-let newArr = [[], []];
-newArr[0].push(arr[0]);
-newArr[0].push(arr[1]);
-newArr[1].push(arr[2]);
-newArr[1].push(arr[2]);
-
-arr.forEach(ele => )
-
-console.log(newArr);
-
-console.log([[[9], [5]], [[7], [1]]].length);
-
+Until then, slice the arrays in half and push them into a new array
 */
 
 function mergeSort(array) {
   if (array.length === 1) return array;
 
-  let subArray1 = array.slice(0, array.length / 2);
-  let subArray2 = array.slice(array.length / 2);
-  subArray1 = mergeSort(subArray1);
-  subArray2 = mergeSort(subArray2);
+  let subArray1 = array.slice(0, array.length / 2); //subarr1 = [9, 5]
+  console.log(subArray1);
+  let subArray2 = array.slice(array.length / 2);    //subarr2 = [7, 1]
+  console.log(subArray2);
+  subArray1 = mergeSort(subArray1);  // subarr1 = (subarr1 = [9] subarr2 = [5]) returns merge(subarr1, subarr2)
+  subArray2 = mergeSort(subArray2); // subarr2 = (subarr1 = [7] subarr2 = [1]) returns merge(subarr1, subarr2)
 
-  return merge(subArray1, subArray2);
+  return merge(subArray1, subArray2); //returns merge(subarr1, subarr2);
 }
 
-mergeSort([1, 5, 3, 92, 2]);
+function merge(array1, array2) {
+  let copy1 = array1.slice();
+  let copy2 = array2.slice();
+  let result = [];
+
+  while (copy1.length > 0 && copy2.length > 0) {
+    result.push(copy1[0] <= copy2[0] ? copy1.shift() : copy2.shift());
+  }
+
+  return result.concat(copy1.length === 0 ? copy2 : copy1);
+}
+
+console.log(mergeSort([9, 5, 7, 1, 8, 5]));

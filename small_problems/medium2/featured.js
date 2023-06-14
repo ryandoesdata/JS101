@@ -18,22 +18,42 @@ an if statement for the largest possible featured number.
 algorithm:
 
 */
-function featured(int) {
-  if (int > 987654321) {
-    return "There is no possible number";
-  }
-  function isFeatured(num) {
-    let sortedArr = String(num).split('').sort((a, b) => a - b);
+function featured(number) {
+  const MAX_FEATURED = 9876543201;
+  let featuredNum = toOddMultipleOf7(number);
 
-    return ((sortedArr.filter((num, index) => num[index] === num[index + 1])));
-  }
-  while (true) {
-    if (isFeatured(int)) {
-    return int;
-    } else {
-      int += 7;
+  do {
+    if (allUnique(featuredNum)) {
+      return featuredNum;
     }
+
+    featuredNum += 14;
+  } while (featuredNum <= MAX_FEATURED);
+
+  return 'There is no possible number that fulfills those requirements.';
+}
+
+function toOddMultipleOf7(number) {
+  do {
+    number += 1;
+  } while (number % 2 === 0 || number % 7 !== 0);
+
+  return number;
+}
+
+function allUnique(number) {
+  let digits = String(number).split('');
+  let seen = {};
+
+  for (let idx = 0; idx < digits.length; idx += 1) {
+    if (seen[digits[idx]]) {
+      return false;
+    }
+
+    seen[digits[idx]] = true;
   }
+
+  return true;
 }
 
 

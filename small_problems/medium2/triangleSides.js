@@ -33,3 +33,23 @@ console.log(triangle(3, 3, 1.5));      // "isosceles"
 console.log(triangle(3, 4, 5));        // "scalene"
 console.log(triangle(0, 3, 3));        // "invalid"
 console.log(triangle(3, 1, 1));        // "invalid"
+
+
+
+
+function triangle(sideOne, sideTwo, sideThree) {
+  let arr = [sideOne, sideTwo, sideThree];
+  let sortedArr = arr.sort((a, b) => a - b);
+  let isScalene = side => arr.filter(num => num === arr[side]).length === 1
+
+  if ((sortedArr[0] + sortedArr[1]) <= sortedArr[2]) {
+    console.log("invalid");
+  } else if (((sideOne + sideTwo + sideThree) / 3) === sideOne) {
+    console.log("equilateral");
+  } else if  (isScalene(0) && isScalene(1)) {
+    console.log("scalene");
+  } else {
+    console.log("isosceles");
+  }
+
+}
