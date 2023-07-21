@@ -52,3 +52,30 @@ function star(n) {
 }
 
 star(19);
+
+function stars(num) {
+  let insideSpace = Math.floor(num / 2) - 1;
+  let outsideSpace = 0;
+
+  while (insideSpace >= 0) {
+    
+    console.log(`${" ".repeat(outsideSpace)}*${" ".repeat(insideSpace)}*${" ".repeat(insideSpace)}*${" ".repeat(outsideSpace)}`);
+    insideSpace--;
+    outsideSpace++;
+  }
+
+  console.log("*".repeat(num));
+  
+  insideSpace = 0;
+  outsideSpace -= 1;
+  
+  while (outsideSpace >= 0) {
+    
+   console.log(`${" ".repeat(outsideSpace)}*${" ".repeat(insideSpace)}*${" ".repeat(insideSpace)}*${" ".repeat(outsideSpace)}`);
+    insideSpace++;
+    outsideSpace--;
+  }
+
+}
+
+stars(13);

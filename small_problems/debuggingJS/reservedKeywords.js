@@ -12,3 +12,23 @@ function isReserved(name) {
 console.log(isReserved('monkey')); // false
 console.log(isReserved('patch'));  // false
 console.log(isReserved('switch')); // should be: true
+
+
+let RESERVED_KEYWORDS = ['break', 'case', 'catch', 'class', 'const', 'continue',
+  'debugger', 'default', 'delete', 'do', 'else', 'enum', 'export', 'extends', 'finally',
+  'for', 'function', 'if', 'implements', 'import', 'in', 'instanceof', 'interface',
+  'let', 'new', 'package', 'private', 'protected', 'public', 'return', 'static',
+  'super', 'switch', 'this', 'throw', 'try', 'typeof', 'var', 'void', 'while',
+  'with', 'yield'];
+
+function isReserved(name) {
+  if (RESERVED_KEYWORDS.find(reserved =>
+    name === reserved)) {
+      return true;
+    }
+  return false;
+}
+
+console.log(isReserved('try')); // false
+console.log(isReserved('blah'));  // false
+console.log(isReserved('try')); // should be: true
